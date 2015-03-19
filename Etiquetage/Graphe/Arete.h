@@ -19,55 +19,46 @@ T est la nature de l'information portée par un sommet et
 S est la nature de l'information portée par une arête
 */
 
-template <class S, class T>
-class Arete : public GElement
-{
+template <class ArcType, class VertexType>
+class Arete : public GElement{
+
+
 public:
-    Sommet<T> *debut, *fin;
-    S v;
 
-    Arete(int clef, Sommet<T>* debut, Sommet<T>* fin, const S& v) : GElement(clef), debut(debut), fin(fin), v(v) {}
 
-    operator string () const;
+    Sommet<VertexType> debut, fin;
+    ArcType valeur;
+
+    Arete(int clef, const Sommet<VertexType> &debut, const Sommet<VertexType> &fin, const ArcType &v) : GElement(clef), debut(debut), fin(fin), valeur(v) {}
+
+    operator string () const{
+        ostringstream oss;
+
+        oss << "Arete (" << endl;
+        oss << GElement::operator string() << endl;
+        oss << "clef debut = " << debut->clef << endl;
+        oss << "clef fin = " << fin->clef << endl;
+        oss << "v = " << valeur << endl;
+        oss << ")";
+        return oss.str();
+    }
 
     /**
-     * vérifie si *this s'appuie sur s1 et s2
-     *
-     * DONNEES : *this, s1, s2
-     * RESULTATS : true si *this s'appuie sur s1 et s2 c'est-à-dire si (début == s1 et fin == s2) ou (début == s2 et fin == s1), false sinon
-     * */
-    bool estEgal(const Sommet<T>* s1, const Sommet<T>* s2) const;
+     * @brief estEgal
+     * @param s1
+     * @param s2
+     * @return true si l'arc est composé de s1 et s2
+     */
+    bool estEgal(const Sommet<VertexType>& s1, const Sommet<VertexType>& s2) const{
+        return (s1 == debut and s2 == fin) or (s1 == fin and s2 == debut);
+    }
 
 };
 
-template <class S, class T>
-Arete<S,T>::operator string () const
-{
-    ostringstream oss;
 
-    oss << "Arete (" << endl;
-    oss << GElement::operator string() << endl;
-    oss << "clef debut = " << debut->clef << endl;
-    oss << "clef fin = " << fin->clef << endl;
-    oss << "v = " << v << endl;
-    oss << ")";
-    return oss.str();
-}
-
-template <class S, class T>
-ostream& operator<<(ostream& os, const Arete<S, T>& arete)
-{
+template <class ArcType, class VertexType>
+ostream& operator<<(ostream& os, const Arete<ArcType, VertexType>& arete){
     return os << (string) arete;
 }
 
-/**
- * vérifie si *this s'appuie sur s1 et s2
- *
- * DONNEES : *this, s1, s2
- * RESULTATS : true si *this s'appuie sur s1 et s2 c'est-à-dire si (début == s1 et fin == s2) ou (début == s2 et fin == s1), false sinon
- **/
-template <class S, class T>
-bool Arete<S,T>::estEgal(const Sommet<T>* s1, const Sommet<T>* s2) const
-{
-    return (s1 == debut and s2 == fin) or (s1 == fin and s2 == debut);
-}
+
