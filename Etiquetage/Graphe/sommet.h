@@ -16,7 +16,12 @@ public:
     string name;
 
     Sommet(const string &name):
-        name(name){}
+        name(name)
+        {}
+
+    Sommet():
+        name("default_name")
+        {}
 
 
     void add_tag(const Etiquette &e){
