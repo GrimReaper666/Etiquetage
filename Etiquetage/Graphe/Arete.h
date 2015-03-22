@@ -22,10 +22,7 @@ S est la nature de l'information portée par une arête
 template <class ArcType, class VertexType>
 class Arete : public GElement{
 
-
 public:
-
-
     Sommet<VertexType> debut, fin;
     ArcType valeur;
 

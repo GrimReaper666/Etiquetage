@@ -6,8 +6,6 @@
 #include "Arete.h"
 #include "Sommet.h"
 #include "../Outils/exception.h"
-//#include "../InfoSommetCarte.h"
-//#include "../InfoAreteCarte.h"
 
 using namespace std;
 
@@ -16,14 +14,10 @@ using namespace std;
 template <class ArcType, class VertexType>
 class Graphe{
 
-
 protected:
-
     int prochaineClef;
 
 public:
-
-
     vector<Sommet<VertexType> > lSommets;
     vector<Arete<ArcType, VertexType> > lAretes;
 
@@ -62,10 +56,6 @@ public:
 };
 
 
-
-
-
-
 /**
  * crée un sommet isolé
  **/
@@ -76,6 +66,7 @@ Sommet<VertexType> Graphe<ArcType, VertexType>::creeSommet(const VertexType& inf
     lSommets(sommetCree);
     return sommetCree;
 }
+
 
 /**
  * crée une arête joignant les 2 sommets debut et fin
