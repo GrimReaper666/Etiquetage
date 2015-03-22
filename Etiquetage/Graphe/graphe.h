@@ -11,6 +11,7 @@
 #include "arete.h"
 #include <unordered_map>
 #include <utility>
+#include <streambuf>
 #include "Etiquette.h"
 
 using std::unordered_map;
@@ -22,6 +23,8 @@ using std::ostream;
 using std::ofstream;
 using std::istream;
 using std::string;
+using std::streambuf;
+using std::stringstream;
 
 
 
@@ -166,7 +169,8 @@ public:
             for(Etiquette* e : s->tags){
                 oss << s->name << "  " << e->cost << "  " << e->resources << endl;
             }
-//            oss << s->name << endl;
+            if(s->tags.size() == 0)
+                oss << s->name << endl;
         }
 
         oss << endl << "sources" << endl;
@@ -202,7 +206,101 @@ void operator>>(fstream& in, Graphe& G)
 
     while(!in.eof()){
         in.getline(line, 256);
+
         std::cout << line << std::endl;
+
+        if(string(line) == string("sectionSommets")){
+            do{
+                in.getline(line, 256);
+                if(in.eof())
+                    break;
+                stringstream ss;
+                ss << line;
+                if(ss.str().size() == 0)
+                    break;
+                string sname;
+                string scost;
+                int cost;
+                string sresources;
+                int resources;
+                ss >> sname;
+                ss >> cost;
+                ss >> resources;
+                std::cout << "[" << ss.str().size() << "]";
+//                std::cout << "\t" << sname << "\t" << cost << "\t" << resources << endl;
+
+                Sommet s(sname);
+//                s.add_tag(Etiquette(&s, cost, resources));
+                G.add_sommet(s);
+//                G.get_sommet(s.name)->add_tag(Etiquette(&s, cost, resources));
+            }while(true);
+        }
+        if(string(line) == string("sources")){
+            do{
+                in.getline(line, 256);
+                if(in.eof())
+                    break;
+                stringstream ss;
+                ss << line;
+                if(ss.str().size() == 0)
+                    break;
+                string name;
+                string cost;
+                string resources;
+                ss >> name;
+                ss >> cost;
+                ss >> resources;
+                std::cout << "[" << ss.str().size() << "]";
+                std::cout << "\t" << name << "\t" << cost << "\t" << resources << endl;
+//                G.add_sommet(Sommet());
+            }while(true);
+        }
+        if(string(line) == string("puits")){
+            do{
+                in.getline(line, 256);
+                if(in.eof())
+                    break;
+                stringstream ss;
+                ss << line;
+                if(ss.str().size() == 0)
+                    break;
+                string name;
+                string cost;
+                string resources;
+                ss >> name;
+                ss >> cost;
+                ss >> resources;
+                std::cout << "[" << ss.str().size() << "]";
+                std::cout << "\t" << name << "\t" << cost << "\t" << resources << endl;
+//                G.add_sommet(Sommet());
+            }while(true);
+        }
+        if(string(line) == string("sectionArcs")){
+            do{
+                in.getline(line, 256);
+                if(in.eof())
+                    break;
+                stringstream ss;
+                ss << line;
+                if(ss.str().size() == 0)
+                    break;
+                string nameA;
+                string nameS1;
+                string nameS2;
+                string cost;
+                string resources;
+                ss >> nameA;
+                ss >> nameS1;
+                ss >> nameS2;
+                ss >> cost;
+                ss >> resources;
+                std::cout << "[" << ss.str().size() << "]";
+                std::cout << "\t" << nameA << "\t" << nameS1 << "\t" << nameS2 << "\t" << cost << "\t" << resources << endl;
+//                G.add_sommet(Sommet());
+            }while(true);
+        }
+//        if(string(line) == string("sectionGraphes")){
+//        }
     }
 }
 

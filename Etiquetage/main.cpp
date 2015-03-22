@@ -34,21 +34,28 @@ int main(){
 
 
     //Test affichage contenu de G
-    cout << g;//<=> cout << (string) g;
-    cout << "-------------------------------" << endl;
+//    cout << g;//<=> cout << (string) g;
+//    cout << "-------------------------------" << endl;
 
     //Test enregistrement de G dans un fichier
-    fstream f;
-    f.open("testDeSortie.grp", ios_base::out);
-    f << g;
-    f.close();
-    cout << "-------------------------------" << endl;
+//    fstream f;
+//    f.open("testDeSortie.gpr", ios_base::out);
+//    f << g;
+//    f.close();
+//    cout << "-------------------------------" << endl;
 
     //Test de lecture d'un graphe depuis un fichier
-    f.open("testDeSortie.grp", ios_base::in);
-    f >> g;
-    f.close();
+    Graphe G("LOL2");
+    fstream f;
+    f.open("Data/data_VRPTW_10.gpr", ios_base::in);
+    if(f.is_open()){
+        f >> G;
+        f.close();
+    }
+    else
+        cout << "open fail" << endl;
     cout << "-------------------------------" << endl;
+    cout << endl << G << endl;
 
 
     return 0;
