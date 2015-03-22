@@ -44,8 +44,8 @@ void jonathan(){
 
 
     //Test affichage contenu de G
-    cout << (string) g;
-//    cout << g;//<=> cout << (string) g;
+//    cout << (string) g;
+    cout << g;//<=> cout << (string) g;
     cout << "-------------------------------" << endl;
 
     //Test enregistrement de G dans un fichier
@@ -74,8 +74,8 @@ void jonathan(){
 
 int main(){
 
-    baptiste();
-//    jonathan();
+//    baptiste();
+    jonathan();
 
     cout << "Hello World!" << endl;
 

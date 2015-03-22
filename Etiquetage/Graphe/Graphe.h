@@ -188,6 +188,8 @@ public:
 
     static string formatDuProf(const Graphe& G){
         ostringstream oss;
+        oss << "# Graphe N = " << G.sommets.size() << " ; M = " << G.aretes.size() << endl;
+        oss << endl << "ressource 1" << endl;
 
         oss << endl << "sectionSommets" << endl;
         for(Sommet* s : G.sommets){
@@ -206,7 +208,7 @@ public:
 
         oss << endl << "sectionArcs" << endl;
         for(Arete a : G.aretes){
-            oss << a.from->name << "  " << a.to->name << "  " << endl;//a.cost << "  " << a.resources <<
+            oss << a.from->name << "  " << a.to->name << endl;// << "  " << a.cost << "  " << a.resource << endl;
         }
 
         oss << endl << "sectionGraphes" << endl;
