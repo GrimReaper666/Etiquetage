@@ -1,0 +1,19 @@
+
+sectionSommets
+
+sources
+...TO DO...
+
+puits
+...TO DO...
+
+sectionArcs
+A  B  
+B  C  
+D  E  
+A  C  
+B  D  
+C  D  
+C  E  
+
+sectionGraphes

@@ -29,6 +29,10 @@ public:
            return oss.str();
        }
 
+    Arete(Sommet *from, Sommet *to, const double & cost):
+        from(from), to(to), cost(cost), resource(0.0){}
+
+
 
 
 };

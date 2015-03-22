@@ -1,20 +1,17 @@
 #include <iostream>
+#include <fstream>
 #include "Graphe/graphe.h"
 #include "Outils/tools.h"
 
 using namespace std;
 
-
-int main(){
-
+void baptiste(){
     Graphe g("lol");
     g.add_sommet(Sommet("A"));
     g.add_sommet(Sommet("B"));
     g.add_sommet(Sommet("C"));
     g.add_sommet(Sommet("D"));
     g.add_sommet(Sommet("E"));
-
-
     g.add_arete("A","B", 5, 7);
     g.add_arete("B","C",10, 10);
     g.add_arete("D","E", 3, 5);
@@ -27,7 +24,57 @@ int main(){
     for(Arete a : lol){
         cout << a;
     }
+}
+
+void jonathan(){
+    Graphe g("lol");
+    g.add_sommet(Sommet("A"));
+    g.add_sommet(Sommet("B"));
+    g.add_sommet(Sommet("C"));
+    g.add_sommet(Sommet("D"));
+    g.add_sommet(Sommet("E"));
+    g.add_arete("A","B", 5, 7);
+    g.add_arete("B","C",10, 10);
+    g.add_arete("D","E", 3, 5);
+    g.add_arete("A","C",7, 3);
+    g.add_arete("B","D",4, 11);
+    g.add_arete("C","D",5, 9);
+    g.add_arete("C","E",9, 13);
+
+
+
+    //Test affichage contenu de G
+    cout << g;//<=> cout << (string) g;
+    cout << "-------------------------------" << endl;
+
+    //Test enregistrement de G dans un fichier
+    fstream f;
+    f.open("testDeSortie.grp", ios_base::out);
+    f << g;
+    f.close();
+    cout << "-------------------------------" << endl;
+
+    //Test de lecture d'un graphe depuis un fichier
+    f.open("testDeSortie.grp", ios_base::in);
+    f >> g;
+    f.close();
+    cout << "-------------------------------" << endl;
+
+
+
+}
+
+int main(){
+
+    baptiste();
+//    jonathan();
+
     cout << "Hello World!" << endl;
+
+
+
+
+
     return 0;
 }
 
