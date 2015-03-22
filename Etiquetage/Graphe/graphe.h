@@ -1,23 +1,32 @@
 #ifndef GRAPHE_H
 #define GRAPHE_H
 #include <vector>
+#include <fstream>
+#include <string>
+#include <ostream>
+#include <istream>
+#include <sstream>
 #include "../Outils/exception.h"
 #include "sommet.h"
 #include "arete.h"
 #include <unordered_map>
 #include <utility>
 
-
 using std::unordered_map;
 using std::pair;
+using std::fstream;
+using std::ostringstream;
+using std::endl;
+using std::ostream;
+using std::ofstream;
+using std::istream;
+using std::string;
+
+
+
 class Graphe{
 
-
-
-
 public:
-
-
     vector<Sommet*> sommets;
     vector<Arete> aretes;
     string name;
@@ -37,9 +46,6 @@ public:
         add_arete(Arete(get_sommet(from),get_sommet(to),cost));
 
     }
-
-
-
 
 
     virtual ~Graphe(){
@@ -150,6 +156,43 @@ public:
         return get_arete(find_sommet(from),find_sommet(to));
     }
 
+
+    operator string () const{
+        ostringstream oss;
+        oss << endl << "sectionSommets" << endl;
+
+        oss << endl << "sources" << endl;
+
+        oss << endl << "puits" << endl;
+
+        oss << endl << "sectionArcs" << endl;
+
+        oss << endl << "sectionGraphes" << endl;
+
+        return oss.str();
+    }
+
 };
+
+//Write a graphe into a stream
+//G should not be empty
+ostream& operator<<(ostream& out, const Graphe& G)
+{
+    return out << (string) G;
+}
+
+//Read a graphe from file
+//Update G given (G should be empty)
+void operator>>(fstream& in, Graphe& G)
+{
+    char line[256];
+
+    while(!in.eof()){
+        in.getline(line, 256);
+        std::cout << line << std::endl;
+    }
+}
+
+
 
 #endif

@@ -4,10 +4,7 @@
 class Sommet;
 class Etiquette{
 
-
 public:
-
-
     const Sommet* from;
     double cost, resources;
 
@@ -19,7 +16,6 @@ public:
 
     Etiquette():
         from(NULL),cost(0),resources(0){}
-
 };
 
 #endif // ETIQUETTE

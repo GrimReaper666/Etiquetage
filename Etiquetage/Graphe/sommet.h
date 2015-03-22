@@ -1,6 +1,6 @@
 #ifndef SOMMET_H
 #define SOMMET_H
-#include "etiquette.h"
+#include "Etiquette.h"
 #include <cfloat>
 #include <string>
 #include <vector>

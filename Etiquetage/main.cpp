@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "Graphe/graphe.h"
 #include "Outils/tools.h"
 
@@ -6,6 +7,7 @@ using namespace std;
 
 
 int main(){
+    cout << "Hello World!" << endl;
 
     Graphe g("lol");
     g.add_sommet(Sommet("A"));
@@ -22,8 +24,29 @@ int main(){
     g.add_arete("C","D",5);
     g.add_arete("C","E",9);
 
-    g.correction_etiquette("A","E",&choisir);
-    cout << "Hello World!" << endl;
+
+
+    //Test affichage contenu de G
+    cout << g;//<=> cout << (string) g;
+    cout << "-------------------------------" << endl;
+
+    //Test enregistrement de G dans un fichier
+    fstream f;
+    f.open("testDeSortie.grp", ios_base::out);
+    f << g;
+    f.close();
+    cout << "-------------------------------" << endl;
+
+    //Test de lecture d'un graphe depuis un fichier
+    f.open("testDeSortie.grp", ios_base::in);
+    f >> g;
+    f.close();
+    cout << "-------------------------------" << endl;
+
+
+
+    //    g.correction_etiquette("A","E",&choisir);
+
     return 0;
 }
 
