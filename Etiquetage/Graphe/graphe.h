@@ -37,6 +37,9 @@ public:
         name(s){}
 
     void add_sommet(const Sommet &s){
+        if( find_sommet(s.name) != NULL){
+         throw Exception("sommet déjà existant");
+        }
         sommets.push_back(new Sommet(s));
     }
 
@@ -65,10 +68,20 @@ public:
         return NULL;
     }
 
+    /**
+     * @brief find_sommet
+     * @param s
+     * @return le sommet dans le graphe ayant le même nom
+     */
     Sommet* find_sommet(const Sommet &s){
         return find_sommet(s.name);
     }
 
+    /**
+     * @brief get_sommet
+     * @param name
+     * @return le sommet dans le graphe ayant le même nom, s'il n'existe pas lève une exception
+     */
     Sommet* get_sommet(const string &name){
         Sommet* s(find_sommet(name));
         if(s == NULL){
@@ -97,9 +110,30 @@ public:
         return ret;
     }
 
-    vector<Arete> correction_etiquette(const Sommet &from, const Sommet &to,Sommet* choisir(const vector<Sommet*> &list), vector<Etiquette*> pareto(const vector<Etiquette*> &list) ){
 
-        vector<Arete> path;
+
+
+    vector<Arete> shortest_path(const Sommet *from,const Sommet *to){
+        //TODO: variantes
+        vector<Arete> path, best;
+        double cost = 0;
+        const Sommet* current = to;
+        while(current != from){
+            double best_et_cost = DBL_MAX;
+            Etiquette* best_et;
+            for(Etiquette* e : current->tags){
+                if(e->cost < best_et_cost){
+                    best_et = e;
+                    best_et_cost = e->cost;
+                }
+            }
+
+
+        }
+        return path;
+    }
+
+    vector<Arete> correction_etiquette(const Sommet &from, const Sommet &to,Sommet* choisir(const vector<Sommet*> &list), vector<Etiquette*> pareto(const vector<Etiquette*> &list) ){
 
         if(sommets.size() > 0){
             Sommet* source(find_sommet(from)), *puit(find_sommet(to));
@@ -135,7 +169,6 @@ public:
                             xj->add_tag(e_prime);
                             Etiquette* e_prime_pointer = xj->tags.back();
                             xj->tags = pareto(xj->tags);
-                            //xj->tags.back() == dernier inséré == e_prime
                             if(std::find(xj->tags.begin(),xj->tags.end(),e_prime_pointer) != xj->tags.end() ){
                                 list.push_back(xj);
                             }
@@ -144,9 +177,13 @@ public:
                 }
             }
 
+            return shortest_path(source,puit);
         }
-        return path;
+        else{
+            throw Exception("Il n'y a pas assez d'arete dans le graphe");
+        }
     }
+
 
 
     Arete get_arete(const Sommet *from, const Sommet *to){

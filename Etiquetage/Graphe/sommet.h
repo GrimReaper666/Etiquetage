@@ -14,13 +14,20 @@ public:
 
     vector<Etiquette*> tags;
     string name;
+    double min_resource,max_resource;
 
-    Sommet(const string &name):
-        name(name)
-        {}
 
     Sommet():
-        name("default_name")
+        name("default_name"),
+        min_resource(0),
+        max_resource(0)
+        {}
+
+
+    Sommet(const string &name, const double &min, const double &max):
+        name(name),
+        min_resource(min),
+        max_resource(max)
         {}
 
 

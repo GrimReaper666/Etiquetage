@@ -6,12 +6,13 @@
 using namespace std;
 
 void baptiste(){
+
     Graphe g("lol");
-    g.add_sommet(Sommet("A"));
-    g.add_sommet(Sommet("B"));
-    g.add_sommet(Sommet("C"));
-    g.add_sommet(Sommet("D"));
-    g.add_sommet(Sommet("E"));
+    g.add_sommet(Sommet("A",0,0));
+    g.add_sommet(Sommet("B",5,15));
+    g.add_sommet(Sommet("C",15,25));
+    g.add_sommet(Sommet("D",10,12));
+    g.add_sommet(Sommet("E",30,36));
     g.add_arete("A","B", 5, 7);
     g.add_arete("B","C",10, 10);
     g.add_arete("D","E", 3, 5);
@@ -24,15 +25,16 @@ void baptiste(){
     for(Arete a : lol){
         cout << a;
     }
+
 }
 
 void jonathan(){
     Graphe g("lol");
-    g.add_sommet(Sommet("A"));
-    g.add_sommet(Sommet("B"));
-    g.add_sommet(Sommet("C"));
-    g.add_sommet(Sommet("D"));
-    g.add_sommet(Sommet("E"));
+    g.add_sommet(Sommet("A",0,0));
+    g.add_sommet(Sommet("B",5,15));
+    g.add_sommet(Sommet("C",15,25));
+    g.add_sommet(Sommet("D",10,12));
+    g.add_sommet(Sommet("E",30,36));
     g.add_arete("A","B", 5, 7);
     g.add_arete("B","C",10, 10);
     g.add_arete("D","E", 3, 5);
