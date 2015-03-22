@@ -12,6 +12,7 @@
 #include <unordered_map>
 #include <algorithm>
 #include <utility>
+#include <streambuf>
 #include "etiquette.h"
 
 using std::unordered_map;
@@ -23,6 +24,8 @@ using std::ostream;
 using std::ofstream;
 using std::istream;
 using std::string;
+using std::streambuf;
+using std::stringstream;
 
 
 
@@ -202,13 +205,36 @@ public:
 
     operator string () const{
         ostringstream oss;
+        oss << "GRAPHE (" << endl;
+        oss << "name = " << name << endl;
+
+        oss << "Sommets (" << endl;
+        for(Sommet* s : sommets){
+            oss << (string) *s << endl;
+        }
+        oss << ")" << endl;
+
+        oss << "Aretes (" << endl;
+        for(Arete a : aretes){
+            oss << (string) a << endl;
+        }
+        oss << "))" << endl;
+
+        return oss.str();
+    }
+
+    static string formatDuProf(const Graphe& G){
+        ostringstream oss;
+        oss << "# Graphe N = " << G.sommets.size() << " ; M = " << G.aretes.size() << endl;
+        oss << endl << "ressource 1" << endl;
 
         oss << endl << "sectionSommets" << endl;
-        for(Sommet* s : sommets){
+        for(Sommet* s : G.sommets){
             for(Etiquette* e : s->tags){
                 oss << s->name << "  " << e->cost << "  " << e->resources << endl;
             }
-//            oss << s->name << endl;
+            if(s->tags.size() == 0)
+                oss << s->name << endl;
         }
 
         oss << endl << "sources" << endl;
@@ -218,8 +244,8 @@ public:
         oss << "...TO DO..."<< endl;
 
         oss << endl << "sectionArcs" << endl;
-        for(Arete a : aretes){
-            oss << a.from->name << "  " << a.to->name << "  " << endl;//a.cost << "  " << a.resources <<
+        for(Arete a : G.aretes){
+            oss << a.from->name << "  " << a.to->name << endl;// << "  " << a.cost << "  " << a.resource << endl;
         }
 
         oss << endl << "sectionGraphes" << endl;
@@ -233,7 +259,7 @@ public:
 //G should not be empty
 ostream& operator<<(ostream& out, const Graphe& G)
 {
-    return out << (string) G;
+    return out << Graphe::formatDuProf(G);
 }
 
 //Read a graphe from file
@@ -244,7 +270,101 @@ void operator>>(fstream& in, Graphe& G)
 
     while(!in.eof()){
         in.getline(line, 256);
+
         std::cout << line << std::endl;
+
+        if(string(line) == string("sectionSommets")){
+            do{
+                in.getline(line, 256);
+                if(in.eof())
+                    break;
+                stringstream ss;
+                ss << line;
+                if(ss.str().size() == 0)
+                    break;
+                string sname;
+                string scost;
+                int cost;
+                string sresources;
+                int resources;
+                ss >> sname;
+                ss >> cost;
+                ss >> resources;
+                std::cout << "[" << ss.str().size() << "]";
+//                std::cout << "\t" << sname << "\t" << cost << "\t" << resources << endl;
+
+                Sommet s(sname);
+//                s.add_tag(Etiquette(&s, cost, resources));
+                G.add_sommet(s);
+//                G.get_sommet(s.name)->add_tag(Etiquette(&s, cost, resources));
+            }while(true);
+        }
+        if(string(line) == string("sources")){
+            do{
+                in.getline(line, 256);
+                if(in.eof())
+                    break;
+                stringstream ss;
+                ss << line;
+                if(ss.str().size() == 0)
+                    break;
+                string name;
+                string cost;
+                string resources;
+                ss >> name;
+                ss >> cost;
+                ss >> resources;
+                std::cout << "[" << ss.str().size() << "]";
+                std::cout << "\t" << name << "\t" << cost << "\t" << resources << endl;
+//                G.add_sommet(Sommet());
+            }while(true);
+        }
+        if(string(line) == string("puits")){
+            do{
+                in.getline(line, 256);
+                if(in.eof())
+                    break;
+                stringstream ss;
+                ss << line;
+                if(ss.str().size() == 0)
+                    break;
+                string name;
+                string cost;
+                string resources;
+                ss >> name;
+                ss >> cost;
+                ss >> resources;
+                std::cout << "[" << ss.str().size() << "]";
+                std::cout << "\t" << name << "\t" << cost << "\t" << resources << endl;
+//                G.add_sommet(Sommet());
+            }while(true);
+        }
+        if(string(line) == string("sectionArcs")){
+            do{
+                in.getline(line, 256);
+                if(in.eof())
+                    break;
+                stringstream ss;
+                ss << line;
+                if(ss.str().size() == 0)
+                    break;
+                string nameA;
+                string nameS1;
+                string nameS2;
+                string cost;
+                string resources;
+                ss >> nameA;
+                ss >> nameS1;
+                ss >> nameS2;
+                ss >> cost;
+                ss >> resources;
+                std::cout << "[" << ss.str().size() << "]";
+                std::cout << "\t" << nameA << "\t" << nameS1 << "\t" << nameS2 << "\t" << cost << "\t" << resources << endl;
+//                G.add_sommet(Sommet());
+            }while(true);
+        }
+//        if(string(line) == string("sectionGraphes")){
+//        }
     }
 }
 

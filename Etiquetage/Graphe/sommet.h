@@ -35,6 +35,18 @@ public:
         tags.push_back(new Etiquette(e));
     }
 
+    operator string () const{
+       std::ostringstream oss;
+       oss << "SOMMET (" << endl;
+       oss << "name = " << name << endl;
+       oss << "Tags = (" << endl;
+       for(Etiquette* e : tags){
+           oss << (string) *e << endl;
+       }
+       oss << "))";
+       return oss.str();
+   }
+
     double best() const{
         double best = DBL_MAX;
         for(Etiquette* e : tags){
