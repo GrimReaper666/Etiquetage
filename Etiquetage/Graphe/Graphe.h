@@ -10,9 +10,10 @@
 #include "sommet.h"
 #include "arete.h"
 #include <unordered_map>
+#include <algorithm>
 #include <utility>
 #include <streambuf>
-#include "Etiquette.h"
+#include "etiquette.h"
 
 using std::unordered_map;
 using std::pair;
@@ -46,8 +47,8 @@ public:
         aretes.push_back(a);
     }
 
-    void add_arete(const string &from, const string &to, const double &cost){
-        add_arete(Arete(get_sommet(from),get_sommet(to),cost));
+    void add_arete(const string &from, const string &to, const double &cost, const double &resource){
+        add_arete(Arete(get_sommet(from),get_sommet(to),cost,resource));
 
     }
 
@@ -79,14 +80,14 @@ public:
         return s;
     }
 
-    vector<Arete> correction_etiquette(const string &from, const string &to,Sommet* choisir(const vector<Sommet*> &) ){
+    vector<Arete> correction_etiquette(const string &from, const string &to,Sommet* choisir(const vector<Sommet*> &list), vector<Etiquette*> pareto(const vector<Etiquette*> &list) ){
         Sommet* f(get_sommet(from)) , *t(get_sommet(to));
-        return correction_etiquette(*f,*t,choisir);
+        return correction_etiquette(*f,*t,choisir,pareto);
     }
 
 
     unordered_map<Sommet*, vector<Sommet*> >* make_successor(){
-        unordered_map< Sommet*, vector<Sommet*> >* ret;
+        unordered_map< Sommet*, vector<Sommet*> >* ret = new unordered_map<Sommet*, vector<Sommet*> >();
         for(Arete a :aretes){
             if(ret->find(a.from) != ret->end()){
                 (*ret)[a.from].push_back(a.to);
@@ -99,7 +100,7 @@ public:
         return ret;
     }
 
-    vector<Arete> correction_etiquette(const Sommet &from, const Sommet &to,Sommet* choisir(const vector<Sommet*> &) ){
+    vector<Arete> correction_etiquette(const Sommet &from, const Sommet &to,Sommet* choisir(const vector<Sommet*> &list), vector<Etiquette*> pareto(const vector<Etiquette*> &list) ){
 
         vector<Arete> path;
 
@@ -114,7 +115,7 @@ public:
             vector<Sommet*> list;
             list.push_back(source);
 
-            Sommet* xi;
+            Sommet* xi = new Sommet();
             xi->add_tag(Etiquette());
             while(list.size() > 0){
                 xi = choisir(list);
@@ -131,13 +132,17 @@ public:
                 for(Sommet* xj : successeurs[xi]){
                     for(Etiquette* e: xi->tags){
                         Arete tmp = get_arete(xi,xj);
-                        /*
-                         TODO
-                        if( e->cost + tmp.cost <= xj->best() ){
-                            Etiquette e_prime =  Etiquette(xi, xi,e->cost + tmp.cost);
+                        //TODO: vérifier bordel de merde
+                        if( e->resources + tmp.resource <= xj->best() ){
+                            Etiquette e_prime =  Etiquette(xi, e->cost + tmp.cost, e->resources + tmp.resource);
+                            xj->add_tag(e_prime);
+                            Etiquette* e_prime_pointer = xj->tags.back();
+                            xj->tags = pareto(xj->tags);
+                            //xj->tags.back() == dernier inséré == e_prime
+                            if(std::find(xj->tags.begin(),xj->tags.end(),e_prime_pointer) != xj->tags.end() ){
+                                list.push_back(xj);
+                            }
                         }
-
-                        */
                     }
                 }
             }

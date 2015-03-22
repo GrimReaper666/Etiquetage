@@ -1,6 +1,6 @@
 #ifndef SOMMET_H
 #define SOMMET_H
-#include "Etiquette.h"
+#include "etiquette.h"
 #include <cfloat>
 #include <string>
 #include <vector>
@@ -16,7 +16,12 @@ public:
     string name;
 
     Sommet(const string &name):
-        name(name){}
+        name(name)
+        {}
+
+    Sommet():
+        name("default_name")
+        {}
 
 
     void add_tag(const Etiquette &e){
