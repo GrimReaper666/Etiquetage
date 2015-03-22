@@ -11,6 +11,7 @@
 #include "arete.h"
 #include <unordered_map>
 #include <utility>
+#include "Etiquette.h"
 
 using std::unordered_map;
 using std::pair;
@@ -159,13 +160,25 @@ public:
 
     operator string () const{
         ostringstream oss;
+
         oss << endl << "sectionSommets" << endl;
+        for(Sommet* s : sommets){
+            for(Etiquette* e : s->tags){
+                oss << s->name << "  " << e->cost << "  " << e->resources << endl;
+            }
+//            oss << s->name << endl;
+        }
 
         oss << endl << "sources" << endl;
+        oss << "...TO DO..."<< endl;
 
         oss << endl << "puits" << endl;
+        oss << "...TO DO..."<< endl;
 
         oss << endl << "sectionArcs" << endl;
+        for(Arete a : aretes){
+            oss << a.from->name << "  " << a.to->name << "  " << endl;//a.cost << "  " << a.resources <<
+        }
 
         oss << endl << "sectionGraphes" << endl;
 
