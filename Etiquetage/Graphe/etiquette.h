@@ -1,6 +1,12 @@
 #ifndef ETIQUETTE
 #define ETIQUETTE
 
+#include <string>
+#include <sstream>
+using std::ostringstream;
+using std::string;
+using std::endl;
+
 class Sommet;
 class Etiquette{
 
@@ -16,6 +22,15 @@ public:
 
     Etiquette():
         from(NULL),cost(0),resources(0){}
+
+    operator string () const{
+       std::ostringstream oss;
+       oss << "ETIQUETTE (" << endl;
+       oss << "Cost = " << cost << endl;
+       oss << "Resources = " << resources << endl;
+       oss << ")";
+       return oss.str();
+   }
 };
 
 #endif // ETIQUETTE

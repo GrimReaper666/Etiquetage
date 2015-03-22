@@ -19,12 +19,13 @@ public:
         from(from), to(to), cost(cost), resource(resource){}
 
 
+    //bug sur cost et resources surement car la l'initialisation à foiré
     operator string () const{
            std::ostringstream oss;
-           oss << "Arete (" << endl;
+           oss << "ARETE (" << endl;
            oss << "debut = " << from->name << endl;
            oss << "fin = " << to->name << endl;
-           oss << "valeur = (" << cost << ", "<< resource << ")" << endl;
+//           oss << "valeur = (" << cost << ", "<< resource << ")" << endl;
            oss << ")";
            return oss.str();
        }

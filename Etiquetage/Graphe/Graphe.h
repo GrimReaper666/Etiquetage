@@ -168,9 +168,29 @@ public:
 
     operator string () const{
         ostringstream oss;
+        oss << "GRAPHE (" << endl;
+        oss << "name = " << name << endl;
+
+        oss << "Sommets (" << endl;
+        for(Sommet* s : sommets){
+            oss << (string) *s << endl;
+        }
+        oss << ")" << endl;
+
+        oss << "Aretes (" << endl;
+        for(Arete a : aretes){
+            oss << (string) a << endl;
+        }
+        oss << "))" << endl;
+
+        return oss.str();
+    }
+
+    static string formatDuProf(const Graphe& G){
+        ostringstream oss;
 
         oss << endl << "sectionSommets" << endl;
-        for(Sommet* s : sommets){
+        for(Sommet* s : G.sommets){
             for(Etiquette* e : s->tags){
                 oss << s->name << "  " << e->cost << "  " << e->resources << endl;
             }
@@ -185,7 +205,7 @@ public:
         oss << "...TO DO..."<< endl;
 
         oss << endl << "sectionArcs" << endl;
-        for(Arete a : aretes){
+        for(Arete a : G.aretes){
             oss << a.from->name << "  " << a.to->name << "  " << endl;//a.cost << "  " << a.resources <<
         }
 
@@ -200,7 +220,7 @@ public:
 //G should not be empty
 ostream& operator<<(ostream& out, const Graphe& G)
 {
-    return out << (string) G;
+    return out << Graphe::formatDuProf(G);
 }
 
 //Read a graphe from file

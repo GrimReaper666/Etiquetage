@@ -44,8 +44,9 @@ void jonathan(){
 
 
     //Test affichage contenu de G
+    cout << (string) g;
 //    cout << g;//<=> cout << (string) g;
-//    cout << "-------------------------------" << endl;
+    cout << "-------------------------------" << endl;
 
     //Test enregistrement de G dans un fichier
 //    fstream f;
@@ -55,17 +56,17 @@ void jonathan(){
 //    cout << "-------------------------------" << endl;
 
     //Test de lecture d'un graphe depuis un fichier
-    Graphe G("LOL2");
-    fstream f;
-    f.open("Data/data_VRPTW_10.gpr", ios_base::in);
-    if(f.is_open()){
-        f >> G;
-        f.close();
-    }
-    else
-        cout << "open fail" << endl;
-    cout << "-------------------------------" << endl;
-    cout << endl << G << endl;
+//    Graphe G("LOL2");
+//    fstream f;
+//    f.open("Data/data_VRPTW_10.gpr", ios_base::in);
+//    if(f.is_open()){
+//        f >> G;
+//        f.close();
+//    }
+//    else
+//        cout << "open fail" << endl;
+//    cout << "-------------------------------" << endl;
+//    cout << endl << G << endl;
 
 
 
@@ -73,7 +74,7 @@ void jonathan(){
 
 int main(){
 
-//    baptiste();
+    baptiste();
 //    jonathan();
 
     cout << "Hello World!" << endl;
