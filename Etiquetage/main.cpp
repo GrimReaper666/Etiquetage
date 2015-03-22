@@ -22,7 +22,10 @@ int main(){
     g.add_arete("C","D",5);
     g.add_arete("C","E",9);
 
-    g.correction_etiquette("A","E",&choisir);
+    vector<Arete> lol =  g.correction_etiquette("A","E",&choisir);
+    for(Arete a : lol){
+        cout << a;
+    }
     cout << "Hello World!" << endl;
     return 0;
 }
