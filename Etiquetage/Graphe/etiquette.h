@@ -11,17 +11,18 @@ class Sommet;
 class Etiquette{
 
 public:
-    const Sommet* from;
+    const Etiquette* from;
+    const Sommet* to;
     double cost, resources;
 
     Etiquette(const Etiquette &e):
-        from(e.from),cost(e.cost),resources(e.resources){}
+        from(e.from),to(e.to),cost(e.cost),resources(e.resources){}
 
-    Etiquette(const Sommet* from,const double &cost, const double &resources):
-        from(from),cost(cost),resources(resources){}
+    Etiquette(const Etiquette* from, const Sommet *to,const double &cost, const double &resources):
+        from(from),to(to), cost(cost),resources(resources){}
 
     Etiquette():
-        from(NULL),cost(0),resources(0){}
+        from(NULL), to(NULL), cost(0),resources(0){}
 
     bool domine(const Etiquette &e){
         return (    (cost < e.cost and resources <= e.resources)
@@ -31,6 +32,8 @@ public:
     operator string () const{
        std::ostringstream oss;
        oss << "ETIQUETTE (" << endl;
+       oss << "From: " << ( (from)?(string)(*from):"aucun") << endl;
+    //   oss <<  "\tTo: " << ((string) (*to)) <<endl;
        oss << "Cost = " << cost << endl;
        oss << "Resources = " << resources << endl;
        oss << ")";

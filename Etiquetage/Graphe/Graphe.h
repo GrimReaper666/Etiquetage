@@ -117,19 +117,18 @@ public:
 
     vector<Arete> shortest_path(const Sommet *from, const Sommet *to){
         //TODO: variantes
-        vector<Arete> path, best;
-        const Sommet* current = to;
-        while(current != from){
-            double best_et_cost = DBL_MAX;
-            Etiquette* best_et;
-            for(Etiquette* e : current->tags){
-                if(e->cost < best_et_cost){
-                    best_et = e;
-                    best_et_cost = e->cost;
-                }
+        vector<Arete> path;
+        const Etiquette* best = to->tags[0];
+        for(Etiquette* e : to->tags){
+            if(e->domine(*best)){
+                best = e;
             }
-            path.push_back(get_arete(best_et->from,current));
-            current = best_et->from;
+        }
+        const Sommet* current = best->to;
+        while(current != from){
+            best = best->from;
+            path.push_back(get_arete(best->to,current));
+            current = best->to;
         }
         return path;
     }
@@ -166,7 +165,7 @@ public:
                         Arete tmp = get_arete(xi,xj);
                         //TODO: vérifier bordel de merde
                         if( e->resources + tmp.resource <= xj->best() ){
-                            Etiquette e_prime =  Etiquette(xi, e->cost + tmp.cost, e->resources + tmp.resource);
+                            Etiquette e_prime =  Etiquette(e, xi, e->cost + tmp.cost, e->resources + tmp.resource);
                             xj->add_tag(e_prime);
                             Etiquette* e_prime_pointer = xj->tags.back();
                             xj->tags = pareto(xj->tags);
