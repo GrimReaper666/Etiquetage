@@ -41,6 +41,10 @@ public:
         tags.push_back(new Etiquette(e));
     }
 
+    void add_default_tag(){
+        tags.push_back(new Etiquette(NULL,this,0,0));
+    }
+
     operator string () const{
        std::ostringstream oss;
        oss << "sommet (" << endl;
@@ -54,10 +58,11 @@ public:
    }
 
     double best() const{
+        //TODO faire une var membre
         double best = DBL_MAX;
         for(Etiquette* e : tags){
-            if(e->cost < best){
-                best = e->cost;
+            if(e->resources < best){
+                best = e->resources;
             }
         }
         return best;

@@ -18,10 +18,12 @@ vector<Etiquette*> pareto(const vector<Etiquette*> &list){
             ret.push_back(best);
         }
         else{
-            ret.push_back(e);
+            if( ! best->domine(*e)){
+                ret.push_back(e);
+            }
         }
     }
-    ret.push_back(best);
+  //  ret.push_back(best);
     return ret;
     //TODO
 }

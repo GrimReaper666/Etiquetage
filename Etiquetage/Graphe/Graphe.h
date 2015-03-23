@@ -125,7 +125,7 @@ public:
             }
         }
         const Sommet* current = best->to;
-        while(current != from){
+        while(best->from){
             best = best->from;
             path.push_back(get_arete(best->to,current));
             current = best->to;
@@ -147,7 +147,7 @@ public:
             list.push_back(source);
 
             Sommet* xi = new Sommet();
-            source->add_tag(Etiquette());
+            source->add_default_tag();
             while(list.size() > 0){
                 xi = choisir(list);
                 //supprime xi de list
@@ -163,9 +163,8 @@ public:
                 for(Sommet* xj : successeurs[xi]){
                     for(Etiquette* e: xi->tags){
                         Arete tmp = get_arete(xi,xj);
-                        //TODO: vérifier bordel de merde
                         if( e->resources + tmp.resource <= xj->best() ){
-                            Etiquette e_prime =  Etiquette(e, xi, e->cost + tmp.cost, e->resources + tmp.resource);
+                            Etiquette e_prime =  Etiquette(e, xj, e->cost + tmp.cost, e->resources + tmp.resource);
                             xj->add_tag(e_prime);
                             Etiquette* e_prime_pointer = xj->tags.back();
                             xj->tags = pareto(xj->tags);
