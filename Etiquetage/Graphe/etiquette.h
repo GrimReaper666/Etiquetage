@@ -21,6 +21,7 @@ public:
     Etiquette(const Etiquette* from, const Sommet *to,const double &cost, const double &resources):
         from(from),to(to), cost(cost),resources(resources){}
 
+
     Etiquette():
         from(NULL), to(NULL), cost(0),resources(0){}
 
