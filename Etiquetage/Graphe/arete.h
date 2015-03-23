@@ -22,10 +22,10 @@ public:
     //bug sur cost et resources surement car la l'initialisation à foiré
     operator string () const{
            std::ostringstream oss;
-           oss << "ARETE (" << endl;
+           oss << "Arete (" << endl;
            oss << "debut = " << from->name << endl;
            oss << "fin = " << to->name << endl;
-//           oss << "valeur = (" << cost << ", "<< resource << ")" << endl;
+           oss << "valeur = (" << cost << ", "<< resource << ")" << endl;
            oss << ")";
            return oss.str();
        }

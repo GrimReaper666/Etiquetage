@@ -30,7 +30,7 @@ public:
         max_resource(0)
         {}
 
-    Sommet(const string &name, const double &min, const double &max):
+    Sommet(const string &name, const double min, const double max):
         name(name),
         min_resource(min),
         max_resource(max)
@@ -43,7 +43,7 @@ public:
 
     operator string () const{
        std::ostringstream oss;
-       oss << "SOMMET (" << endl;
+       oss << "sommet (" << endl;
        oss << "name = " << name << endl;
        oss << "Tags = (" << endl;
        for(Etiquette* e : tags){
