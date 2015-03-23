@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include "Graphe/graphe.h"
+#include "Graphe/Graphe.h"
 #include "Outils/tools.h"
 
 using namespace std;
@@ -23,7 +23,7 @@ void baptiste(){
 
     vector<Arete> lol =  g.correction_etiquette("A","E",&choisir,&pareto);
     for(Arete a : lol){
-        cout << a;
+        cout << a << endl;
     }
 
 }
@@ -76,8 +76,8 @@ void jonathan(){
 
 int main(){
 
-//    baptiste();
-    jonathan();
+    baptiste();
+//    jonathan();
 
     cout << "Hello World!" << endl;
 

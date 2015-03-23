@@ -24,6 +24,12 @@ public:
         {}
 
 
+    Sommet(const string &name):
+        name(name),
+        min_resource(0),
+        max_resource(0)
+        {}
+
     Sommet(const string &name, const double &min, const double &max):
         name(name),
         min_resource(min),

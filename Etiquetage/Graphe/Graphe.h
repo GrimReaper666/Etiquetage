@@ -115,11 +115,9 @@ public:
 
 
 
-
-    vector<Arete> shortest_path(const Sommet *from,const Sommet *to){
+    vector<Arete> shortest_path(const Sommet *from, const Sommet *to){
         //TODO: variantes
         vector<Arete> path, best;
-        double cost = 0;
         const Sommet* current = to;
         while(current != from){
             double best_et_cost = DBL_MAX;
@@ -130,8 +128,8 @@ public:
                     best_et_cost = e->cost;
                 }
             }
-
-
+            path.push_back(get_arete(best_et->from,current));
+            current = best_et->from;
         }
         return path;
     }
@@ -150,7 +148,7 @@ public:
             list.push_back(source);
 
             Sommet* xi = new Sommet();
-            xi->add_tag(Etiquette());
+            source->add_tag(Etiquette());
             while(list.size() > 0){
                 xi = choisir(list);
                 //supprime xi de list
@@ -293,7 +291,7 @@ void operator>>(fstream& in, Graphe& G)
                 std::cout << "[" << ss.str().size() << "]";
 //                std::cout << "\t" << sname << "\t" << cost << "\t" << resources << endl;
 
-                Sommet s(sname);
+                Sommet s(sname);//TODO: en fait j'avais oublié de mettre ressource min et max dans sommet, donc faudra peut être que tu revois cette partie, en attendant je met un constructeur avec juste le nom, vire le dès que t'en a plus besoin.
 //                s.add_tag(Etiquette(&s, cost, resources));
                 G.add_sommet(s);
 //                G.get_sommet(s.name)->add_tag(Etiquette(&s, cost, resources));
