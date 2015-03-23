@@ -10,7 +10,18 @@ using std::vector;
 //fonction pareto variant 1
 vector<Etiquette*> pareto(const vector<Etiquette*> &list){
     vector<Etiquette*> ret;
-    ret.push_back(list[0]);
+    Etiquette* best = list[0];
+    for(Etiquette* e : list){
+        if(e->domine(*best)){
+            best = e;
+            ret = vector<Etiquette*>();
+            ret.push_back(best);
+        }
+        else{
+            ret.push_back(e);
+        }
+    }
+    ret.push_back(best);
     return ret;
     //TODO
 }

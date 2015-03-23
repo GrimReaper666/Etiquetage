@@ -65,7 +65,7 @@ public:
 
     virtual ~Sommet(){
         for(Etiquette* e: tags){
-            delete e;
+           // delete e;
         }
     }
 
