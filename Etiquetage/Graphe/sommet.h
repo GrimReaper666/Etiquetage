@@ -30,11 +30,12 @@ public:
         max_resource(0)
         {}
 
-    Sommet(const string &name, const double &min, const double &max):
-        name(name),
-        min_resource(min),
-        max_resource(max)
-        {}
+    Sommet(const string &name, const double min, const double max):
+        name(name)
+        {
+        this->min_resource = min;
+        this->max_resource = max;
+    }
 
 
     void add_tag(const Etiquette &e){

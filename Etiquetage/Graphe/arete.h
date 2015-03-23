@@ -15,8 +15,11 @@ public:
     Sommet* from, *to;
     double cost, resource;
 
-    Arete(Sommet *from, Sommet *to, const double & cost, const double &resource):
-        from(from), to(to), cost(cost), resource(resource){}
+    Arete(Sommet *from, Sommet *to, const double cost, const double resource):
+        from(from), to(to){
+        this->cost = cost;
+        this->resource = resource;
+    }
 
 
     //bug sur cost et resources surement car la l'initialisation à foiré
@@ -25,13 +28,19 @@ public:
            oss << "ARETE (" << endl;
            oss << "debut = " << from->name << endl;
            oss << "fin = " << to->name << endl;
-//           oss << "valeur = (" << cost << ", "<< resource << ")" << endl;
+           oss << "valeur = (" << cost << ", "<< resource << ")" << endl;
            oss << ")";
            return oss.str();
        }
 
-    Arete(Sommet *from, Sommet *to, const double & cost):
+    Arete(Sommet *from, Sommet *to, const double cost):
         from(from), to(to), cost(cost), resource(0.0){}
+
+    Arete(Sommet *from, Sommet *to):
+        from(from), to(to){
+        cost = 0.0;
+        resource = 0.0;
+    }
 
 
 
