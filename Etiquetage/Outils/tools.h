@@ -3,16 +3,31 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include <chrono>
+#include <functional>
 #include "../Graphe/etiquette.h"
 using std::vector;
 using std::cout;
 using std::endl;
+using std::chrono::milliseconds;
+using std::chrono::system_clock;
+using std::chrono::duration;
+using std::chrono::duration_cast;
 //fonction pour mesurer le temps d'execution d'une autre fonction
-
+template<typename F, typename ...Args>
+milliseconds execution(unsigned int nb_iter, std::function<F(Args&&...) > func,Args&&... args){
+  milliseconds total = 0;
+  for(unsigned int i = 0 ; i < nb_iter ; i++){
+      auto start = system_clock::now();
+      func(std::forward<Args>(args)...);
+      auto duration = duration_cast< milliseconds>(system_clock::now() - start);
+      total+= duration.count();
+  }
+  return total/nb_iter;
+}
 
 //fonction pareto variant 1
 vector<Etiquette*> pareto(const vector<Etiquette*> &list){
-    cout << "entrée : "<< list.size() << endl;
     vector<Etiquette*> ret, dominees;
     //création de la liste des étiquettes dominées
     for(auto e = list.begin(); e != list.end() ; e++){
@@ -30,32 +45,6 @@ vector<Etiquette*> pareto(const vector<Etiquette*> &list){
             ret.push_back(e);
         }
     }
-
-    /*
-    for(auto best = list.begin(); best != list.end() ; best++){
-        tmp.clear();
-        for(auto e = best; e != list.end() ; e++){
-            if( (*e)->domine(**best) ){
-                //si e domine best on arrete d'itérer,et on vide tmp
-                tmp.clear();
-                break;
-            }
-            if( ! (*best)->domine(**e)){
-                //si e ne domine pas best et best ne domine pas e on ajoute e
-                tmp.push_back(*e);
-            }
-        }
-        auto it = tmp.begin();
-        while(it != tmp.end()){
-            if(std::find(ret.begin(),ret.end(),*it) == ret.end()){
-                ret.push_back(*it);
-            }
-            it++;
-        }
-    }
-    */
-     cout << "sortie : "<< ret.size() <<endl;
-
     return ret;
 }
 
