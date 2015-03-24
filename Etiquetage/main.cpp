@@ -292,7 +292,6 @@ void connexionEtDessin(){
         DessinManager dm(&connect);
 //        dm.dessinerAretes(G.getVArete());//listes d'arêtes
         dm.dessinerGraphe(G);//graphe
-
     }
     catch(Exception e){
         cout << e.message << endl;
