@@ -114,7 +114,7 @@ void baptiste(){
 
     Graphe g("LOL2");
     fstream f;
-    f.open("Data/data_VRPTW_10.gpr", ios_base::in);
+    f.open("Data/data_VRPTW_160_10_5_10.gpr", ios_base::in);
     if(f.is_open()){
         f >> g;
         f.close();
@@ -122,7 +122,7 @@ void baptiste(){
     else
         cout << "open fails" << endl;
 
-    vector<Arete> lol =  g.correction_etiquette("s0","p0",&choisir,&pareto);
+    vector<Arete> lol =  g.correction_etiquette("i1","i160",&choisir,&pareto);
  /*   for(Etiquette* e : g.get_sommet("p0")->tags){
         cout  <<(string) (*e) <<endl;
     }
@@ -302,11 +302,11 @@ void connexionEtDessin(){
 
 int main(){
 
-//    baptiste();
+    baptiste();
 //    jonathan();
 
 //    tuto_io_graphe();
-    connexionEtDessin();
+ //   connexionEtDessin();
 
 
 
