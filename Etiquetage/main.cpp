@@ -7,7 +7,7 @@
 
 using namespace std;
 
-//Dégeulasse mais on s'en fout
+//Dégeulasse mais on s'en fout <= problèmes d'inclusions multiple réglé comme ça !
 std::ostream& operator<<(std::ostream& os, const Arete & arete){
     return os << (string) arete;
 }

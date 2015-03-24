@@ -1,0 +1,24 @@
+LAMONT Jonathan && LESQUOY Baptiste
+L3 - Mars 2015
+
+
+
+		PROJET Recherche et Optimisation [C++]
+		
+
+
++ Projet Qt disponnible dans les sources.
++ Compilation sous g++ :
+	g++.exe -o etiquette.exe *.cpp Outils/*.cpp Dessin/*.cpp -std=c++11 -lws2_32 -g -W -Wall
++ Lancement du serveur graphique pour modéliser un graphe avec java
+	java -jar serveur_dessin.jar
+
++ Les ressources sont dans le dossier Data
+	=> Graphes fournis pour les tests statistiques
+	=> Serveur graphique : serveur_dessin.jar
+	=> Rapport sous format texte
+	=> Divers ressources comme les diagrammes de classes DIA, etc...
+
+
+
+
