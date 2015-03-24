@@ -24,9 +24,9 @@ void DessinManager::dessinerAretes(const vector<Arete> &va, bool graphe = true) 
         if( ! graphe){
             stringstream ss;
             ss << "texte: #000000, " + a.to->name + ", ";
-            ss << a.to->min_resource;
+            ss << (a.to->min_resource*8-300);
             ss << ", ";
-            ss << a.to->max_resource;
+            ss << (a.to->max_resource*6-300);
             message = ss.str();
             cout << message << endl;
             _connexion->envoyer(message.c_str());

@@ -312,6 +312,8 @@ void connexionEtDessin(){
 
 }
 
+
+
 int main(){
 
  //   baptiste();
@@ -329,7 +331,8 @@ int main(){
 /*
 int main(int argc, char* argv[])
 {
-    string path = "Data/data_VRPTW_10.gpr";
+//    string path = "Data/data_VRPTW_10.gpr";
+    string path = "Data/data_VRPTW_160_10_5_10.gpr";
     cout << endl << "\t\tPROJET RO" << endl << endl;
 
 //Récupération du chemin du graphe à ouvrir
@@ -366,33 +369,35 @@ int main(int argc, char* argv[])
 
 
         //Affichage du chemin rendu par l'algo
-//        vector<Arete> liste;// = retour algo
-//        cout << "+ Chemin rendu par l'algo:" << endl;
-//        for(Arete a : liste){
-//            cout << a.from->name << " -> ";
-//        }
-//        cout << liste.back().a.to->name << endl;
+        vector<Arete> liste = G.correction_etiquette("i1", "i160",&choisir,&pareto);
+        cout << endl << "[+] Chemin rendu par l'algo:" << endl;
+        stringstream ss;
+        for(Arete a : liste){
+            ss << a.to->name << " <- ";
+        }
+        ss << liste.back().from->name << endl;
+        cout << ss.str();
 
 
         //Connexion au serveur de dessin
-//        cout << endl << endl << "[+] Connexion au serveur de dessin : " << endl;
-//        const string ip = "127.0.0.1";
-//        cout << "\tIP = " << ip << endl;
-//        int port = 9111;
-//        cout << "\tPort = " << port << endl << endl;
-//        try{
-//            Connexion connect = Connexion(ip, port);
-//            DessinManager dm(&connect);
-//            cout << "\t[+] Connexion reussie." << endl;
-//            dm.dessinerGraphe(G);//graphe
-//            cout << endl << "\t[+] Graphe envoye au serveur. [Rouge]" << endl << endl;
-////TODO !!!
-//            //        dm.dessinerAretes(G.getVArete());//listes d'arêtes
-//            cout << "\t[+] Chemin parcouru par l'algorithme envoye au serveur. [Noir]" << endl;
-//        }
-//        catch(Exception e){
-//            cout << endl << e.message << endl;
-//        }
+        cout << endl << endl << "[+] Connexion au serveur de dessin : " << endl;
+        const string ip = "127.0.0.1";
+        cout << "\tIP = " << ip << endl;
+        int port = 9111;
+        cout << "\tPort = " << port << endl << endl;
+        try{
+            Connexion connect = Connexion(ip, port);
+            DessinManager dm(&connect);
+            cout << "\t[+] Connexion reussie." << endl;
+            dm.dessinerGraphe(G);//graphe
+            cout << endl << "\t[+] Graphe envoye au serveur. [Rouge]" << endl << endl;
+ //TODO !!!
+            //        dm.dessinerAretes(G.getVArete());//listes d'arêtes
+            cout << "\t[+] Chemin parcouru par l'algorithme envoye au serveur. [Noir]" << endl;
+        }
+        catch(Exception e){
+            cout << endl << e.message << endl;
+        }
     }
     else
         cout << "\t[-] Fichier NON ouvert." << endl;
