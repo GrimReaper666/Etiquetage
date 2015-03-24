@@ -122,15 +122,27 @@ void baptiste(){
     else
         cout << "open fails" << endl;
 
+    const unsigned int nb_iter = 2000;
+    unsigned int total = 0;
+    for(unsigned int i = 0 ; i < nb_iter ; i++){
+        auto start = system_clock::now();
+        g.correction_etiquette("i1","i160",&choisir,&pareto);
+        auto duration = duration_cast< milliseconds>(system_clock::now() - start);
+        total+= duration.count();
+        cout << i <<endl;
+    }
+    long double moyenne = total/(long double)nb_iter;
+    cout << "une moyenne de: " << moyenne << endl;
+    /*
     vector<Arete> lol =  g.correction_etiquette("i1","i160",&choisir,&pareto);
  /*   for(Etiquette* e : g.get_sommet("p0")->tags){
         cout  <<(string) (*e) <<endl;
     }
-    */
+
       for(Arete a : lol){
         cout << a << endl;
     }
-
+*/
 
 
 }
