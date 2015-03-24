@@ -280,8 +280,8 @@ void connexionEtDessin(){
     //Lecture d'un graphe depuis un fichier
     Graphe G("LOL2");
     fstream f;
-    f.open("Data/data_VRPTW_10.gpr", ios_base::in);
-//    f.open("Data/data_VRPTW_160_10_5_10.gpr", ios_base::in);
+ //   f.open("Data/data_VRPTW_10.gpr", ios_base::in);
+    f.open("Data/data_VRPTW_160_10_5_10.gpr", ios_base::in);
     if(f.is_open()){
         f >> G;
         f.close();
@@ -297,13 +297,14 @@ void connexionEtDessin(){
 
     //connexion
     cout << "CouCou CONNEXION !!!" << endl;
-    const string ip = "10.10.130.82";
+    const string ip = "127.0.0.1";
     int port = 9111;
     try{
         Connexion connect = Connexion(ip, port);
         DessinManager dm(&connect);
 //        dm.dessinerAretes(G.getVArete());//listes d'arêtes
-        dm.dessinerGraphe(G);//graphe
+      //  dm.dessinerGraphe(G);//graphe
+        dm.dessinerAretes(G.correction_etiquette("i1","i160",&choisir,&pareto),false);
     }
     catch(Exception e){
         cout << e.message << endl;
@@ -313,11 +314,11 @@ void connexionEtDessin(){
 
 int main(){
 
-    baptiste();
+ //   baptiste();
 //    jonathan();
 
 //    tuto_io_graphe();
- //   connexionEtDessin();
+    connexionEtDessin();
 
 
 

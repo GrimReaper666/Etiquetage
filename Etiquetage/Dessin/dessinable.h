@@ -19,7 +19,7 @@ class Dessinable{
 
 public:
 
-    virtual void dessinerAretes(const vector<Arete> &va)const = 0;
+    virtual void dessinerAretes(const vector<Arete> &va,bool graphe = true)const = 0;
     virtual ~Dessinable(){}
 
 };

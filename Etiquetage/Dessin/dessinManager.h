@@ -22,8 +22,14 @@ public:
     DessinManager(Connexion* c);
     virtual ~DessinManager(){}
 
-    void dessinerAretes(const vector<Arete> &va)const;
+    /**
+     * @brief dessinerAretes
+     * @param va
+     * @param graphe true si on dessine un graphe, false si on dessine le chemin
+     */
+    void dessinerAretes(const vector<Arete> &va, bool graphe)const;
     void dessinerGraphe(const Graphe& G)const;
+
 
 };
 
