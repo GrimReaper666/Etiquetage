@@ -27,7 +27,7 @@ public:
 
     bool domine(const Etiquette &e){
         return (    (cost < e.cost and resources <= e.resources)
-                or  (cost = e.cost and resources < e.resources)      );
+                or  (cost == e.cost and resources < e.resources)      );
     }
 
     ~Etiquette(){}
@@ -42,12 +42,14 @@ public:
 
     operator string () const{
        std::ostringstream oss;
+       /*
        oss << "ETIQUETTE (" << endl;
        oss << "From: " << ( (from)?(string)(*from):"aucun") << endl;
     //   oss <<  "\tTo: " << ((string) (*to)) <<endl;
+    */
        oss << "Cost = " << cost << endl;
        oss << "Resources = " << resources << endl;
-       oss << ")";
+      // oss << ")";
        return oss.str();
    }
 };

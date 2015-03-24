@@ -117,11 +117,11 @@ public:
 
 
     vector<Arete> shortest_path(const Sommet *from, const Sommet *to){
-        //TODO: variantes
+        //TODO: variantes + virer from
         vector<Arete> path;
         const Etiquette* best = to->tags[0];
         for(Etiquette* e : to->tags){
-            if(e->domine(*best)){
+            if(e->cost < best->cost){
                 best = e;
             }
         }
@@ -131,12 +131,14 @@ public:
             path.push_back(get_arete(best->to,current));
             current = best->to;
         }
+
         return path;
     }
 
     vector<Arete> correction_etiquette(const Sommet &from, const Sommet &to,Sommet* choisir(const vector<Sommet*> &list), vector<Etiquette*> pareto(const vector<Etiquette*> &list) ){
 
         if(sommets.size() > 0){
+
             Sommet* source(find_sommet(from)), *puit(find_sommet(to));
 
             //On réinitialise les tags
