@@ -324,3 +324,79 @@ int main(){
 
     return 0;
 }
+
+
+/*
+int main(int argc, char* argv[])
+{
+    string path = "Data/data_VRPTW_10.gpr";
+    cout << endl << "\t\tPROJET RO" << endl << endl;
+
+//Récupération du chemin du graphe à ouvrir
+    if(argc == 1){
+        //demande de rentrer le nom du graphe à lire
+        cout << " Entrez le nom du fichier contenant le graphe a ouvrir : ";
+//        cin >> path;
+    }
+    else if(argc == 2){
+        //ouvrir le graphe donné en paramètre
+        stringstream ss;
+        ss << argv[1];
+        path = ss.str();
+    }
+
+    cout << endl;
+    cout << endl << "[+] Chemin vers le graphe a ouvrir :" << endl;
+    cout << path << endl;
+//    cin >> path;
+
+
+//Lecture d'un graphe depuis un fichier
+    Graphe G("LOL");
+    fstream f;
+    f.open(path.c_str(), ios_base::in);
+    if(f.is_open()){
+        cout << endl << "[+] Ouverture du fichier reussi." << endl;
+        f >> G;
+        f.close();
+
+
+        //TODO
+        //insérer ici l'utilisation de l'algo
+
+
+        //Affichage du chemin rendu par l'algo
+//        vector<Arete> liste;// = retour algo
+//        cout << "+ Chemin rendu par l'algo:" << endl;
+//        for(Arete a : liste){
+//            cout << a.from->name << " -> ";
+//        }
+//        cout << liste.back().a.to->name << endl;
+
+
+        //Connexion au serveur de dessin
+//        cout << endl << endl << "[+] Connexion au serveur de dessin : " << endl;
+//        const string ip = "127.0.0.1";
+//        cout << "\tIP = " << ip << endl;
+//        int port = 9111;
+//        cout << "\tPort = " << port << endl << endl;
+//        try{
+//            Connexion connect = Connexion(ip, port);
+//            DessinManager dm(&connect);
+//            cout << "\t[+] Connexion reussie." << endl;
+//            dm.dessinerGraphe(G);//graphe
+//            cout << endl << "\t[+] Graphe envoye au serveur. [Rouge]" << endl << endl;
+////TODO !!!
+//            //        dm.dessinerAretes(G.getVArete());//listes d'arêtes
+//            cout << "\t[+] Chemin parcouru par l'algorithme envoye au serveur. [Noir]" << endl;
+//        }
+//        catch(Exception e){
+//            cout << endl << e.message << endl;
+//        }
+    }
+    else
+        cout << "\t[-] Fichier NON ouvert." << endl;
+
+    return 0;
+}
+*/
