@@ -1,9 +1,9 @@
-#include "dessinManager.h"
 #include <iostream>
 #include <sstream>
 #include <string>
 #include <string.h>
 #include "../Outils/exception.h"
+#include "dessinManager.h"
 
 using namespace std;
 
@@ -16,22 +16,24 @@ _connexion(c){}
 
 
 
-void DessinManager::dessinerArete(const Arete &a) const{
-//    string message = s.toString();
-//    cout << message;
-//    _connexion->envoyer(message.c_str());
+void DessinManager::dessinerAretes(const vector<Arete> &va) const{
+    for(Arete a : va){
+        string message = a.toString();
+        cout << message;
+        _connexion->envoyer(message.c_str());
 
-//	if (_connexion->recevoir() != 0){
-//		cout << "le serveur a bien reçu le segment" << endl;
-//	}
-//	else{
-//		cout << "il y a eu une erreur lors de l'envoie" << endl;
-//	}
-
+        if (_connexion->recevoir() != 0){
+            cout << "le serveur a bien reçu le segment" << endl;
+        }
+        else{
+            cout << "il y a eu une Exception lors de l'envoie" << endl;
+        }
+    }
 }
 
-
-
+void DessinManager::dessinerGraphe(const Graphe& G)const{
+    dessinerAretes(G.getVArete());
+}
 
 
 

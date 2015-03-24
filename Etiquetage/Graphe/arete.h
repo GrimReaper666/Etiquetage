@@ -1,5 +1,6 @@
 #ifndef ARETE_H
 #define ARETE_H
+
 #include "sommet.h"
 #include <iostream>
 #include <ostream>
@@ -35,12 +36,14 @@ public:
 
 
 
+    string toString()const {
+        ostringstream ser;
+        ser.flush();
+        ser << "segment: "<< "#FF0000" << ", ";//black
+        ser << from->toString() << ", " << to->toString();
+        return ser.str();
+    }
 
 };
-
-
-std::ostream& operator<<(std::ostream& os, const Arete & arete){
-    return os << (string) arete;
-}
 
 #endif

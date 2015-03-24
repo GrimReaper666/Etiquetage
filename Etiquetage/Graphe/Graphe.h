@@ -32,8 +32,6 @@ using std::stringstream;
 class Graphe{
 
 private:
-
-
     vector<Sommet*> sommets;
     vector<Arete> aretes;
     unordered_map< Sommet* , vector<Sommet*> > successeurs;
@@ -253,118 +251,21 @@ public:
         return oss.str();
     }
 
-};
-
-//Write a graphe into a stream
-//G should not be empty
-ostream& operator<<(ostream& out, const Graphe& G)
-{
-    return out << Graphe::formatDuProf(G);
-}
-
-//Read a graphe from file
-//Update G given (G should be empty)
-void operator>>(fstream& in, Graphe& G)
-{
-    char line[256];
-
-    while(!in.eof()){
-        in.getline(line, 256);
-
-        std::cout << line << std::endl;
-
-        if(string(line) == string("sectionSommets")){
-            do{
-                in.getline(line, 256);
-                if(in.eof())
-                    break;
-                stringstream ss;
-                ss << line;
-                if(ss.str().size() == 0)
-                    break;
-                string sname;
-                double min;
-                double max;
-                ss >> sname;
-                ss >> min;
-                ss >> max;
-                std::cout << "[" << ss.str().size() << "]";
-                std::cout << "\t" << sname << "\t" << min << "\t" << max << endl;
-
-                Sommet s(sname, min, max);
-//                s.add_tag(Etiquette(&s, cost, resources));
-                G.add_sommet(s);
-            }while(true);
-        }
-        if(string(line) == string("sources")){
-            do{
-                in.getline(line, 256);
-                if(in.eof())
-                    break;
-                stringstream ss;
-                ss << line;
-                if(ss.str().size() == 0)
-                    break;
-//                string name;
-//                string cost;
-//                string resources;
-//                ss >> name;
-//                ss >> cost;
-//                ss >> resources;
-//                std::cout << "[" << ss.str().size() << "]";
-//                std::cout << "\t" << name << "\t" << cost << "\t" << resources << endl;
-//                G.add_sommet(Sommet());
-            }while(true);
-        }
-        if(string(line) == string("puits")){
-            do{
-                in.getline(line, 256);
-                if(in.eof())
-                    break;
-                stringstream ss;
-                ss << line;
-                if(ss.str().size() == 0)
-                    break;
-//                string name;
-//                string cost;
-//                string resources;
-//                ss >> name;
-//                ss >> cost;
-//                ss >> resources;
-//                std::cout << "[" << ss.str().size() << "]";
-//                std::cout << "\t" << name << "\t" << cost << "\t" << resources << endl;
-//                G.add_sommet(Sommet());
-            }while(true);
-        }
-        if(string(line) == string("sectionArcs")){
-            do{
-                in.getline(line, 256);
-                if(in.eof())
-                    break;
-                stringstream ss;
-                ss << line;
-                if(ss.str().size() == 0)
-                    break;
-                string nameA;
-                string nameS1;
-                string nameS2;
-                double cost;
-                double resource;
-                ss >> nameA;
-                ss >> nameS1;
-                ss >> nameS2;
-                ss >> cost;
-                ss >> resource;
-                std::cout << "[" << ss.str().size() << "]";
-                std::cout << "\t" << nameA << "\t" << nameS1 << "\t" << nameS2 << "\t" << cost << "\t" << resource << endl;
-
-                G.add_arete(nameS1, nameS2, cost, resource);
-            }while(true);
-        }
-//        if(string(line) == string("sectionGraphes")){
-//        }
+    const vector<Arete>& getVArete() const{
+        return this->aretes;
     }
-}
+
+//    string toString()const {
+//        ostringstream ser;
+//        ser.flush();
+//        for(Arete a : this->aretes){
+//            ser << "segment: "<< "#000000" << ", ";//black
+//            ser << a.from->toString() << ", " << a.to->toString();
+//        }
+//        return ser.str();
+//    }
+
+};
 
 
 

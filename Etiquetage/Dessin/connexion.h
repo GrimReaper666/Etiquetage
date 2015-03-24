@@ -26,11 +26,13 @@
 #else
 
     #include <winsock2.h>
-    #pragma comment(lib, "ws2_32.lib") // sp�cifique � VISUAL C++
+    #include <stdlib.h>
+    #include <stdio.h>
+//    #pragma comment(lib, "ws2_32.lib") // sp�cifique � VISUAL C++
     #if (_MSC_VER == 1800)
         #define strdup _strdup
     #endif
-
+//    #define strdup(p)
 #endif
 
 

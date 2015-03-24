@@ -22,7 +22,8 @@ public:
     DessinManager(Connexion* c);
     virtual ~DessinManager(){}
 
-    void dessinerArete(const Arete &a)const;
+    void dessinerAretes(const vector<Arete> &va)const;
+    void dessinerGraphe(const Graphe& G)const;
 
 };
 

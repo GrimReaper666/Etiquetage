@@ -1,7 +1,10 @@
 #ifndef DESSINABLE_H
 #define DESSINABLE_H
 
-#include "../Graphe/Arete.h"
+#include <vector>
+#include "../Graphe/Graphe.h"
+
+using std::vector;
 
 
 
@@ -16,7 +19,7 @@ class Dessinable{
 
 public:
 
-    virtual void dessinerArete(const Arete &a)const = 0;
+    virtual void dessinerAretes(const vector<Arete> &va)const = 0;
     virtual ~Dessinable(){}
 
 };

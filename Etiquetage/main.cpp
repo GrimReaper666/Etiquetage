@@ -1,9 +1,112 @@
 #include <iostream>
 #include <fstream>
-#include "Graphe/Graphe.h"
 #include "Outils/tools.h"
+#include "Outils/exception.h"
+#include "Dessin/connexion.h"
+#include "Dessin/dessinManager.h"
 
 using namespace std;
+
+//Dégeulasse mais on s'en fout
+std::ostream& operator<<(std::ostream& os, const Arete & arete){
+    return os << (string) arete;
+}
+//Write a graphe into a stream
+//G should not be empty
+ostream& operator<<(ostream& out, const Graphe& G)
+{
+    return out << Graphe::formatDuProf(G);
+}
+//Read a graphe from file
+//Update G given (G should be empty)
+void operator>>(fstream& in, Graphe& G)
+{
+    char line[256];
+
+    while(!in.eof()){
+        in.getline(line, 256);
+
+        std::cout << line << std::endl;
+
+        if(string(line) == string("sectionSommets")){
+            do{
+                in.getline(line, 256);
+                if(in.eof())
+                    break;
+                stringstream ss;
+                ss << line;
+                if(ss.str().size() == 0)
+                    break;
+                string sname;
+                double min;
+                double max;
+                ss >> sname;
+                ss >> min;
+                ss >> max;
+                std::cout << "[" << ss.str().size() << "]";
+                std::cout << "\t" << sname << "\t" << min << "\t" << max << endl;
+
+                Sommet s(sname, min, max);
+//                s.add_tag(Etiquette(&s, cost, resources));
+                G.add_sommet(s);
+            }while(true);
+        }
+        if(string(line) == string("sources")){
+            do{
+                in.getline(line, 256);
+                if(in.eof())
+                    break;
+                stringstream ss;
+                ss << line;
+                if(ss.str().size() == 0)
+                    break;
+                //...
+            }while(true);
+        }
+        if(string(line) == string("puits")){
+            do{
+                in.getline(line, 256);
+                if(in.eof())
+                    break;
+                stringstream ss;
+                ss << line;
+                if(ss.str().size() == 0)
+                    break;
+                //...
+            }while(true);
+        }
+        if(string(line) == string("sectionArcs")){
+            do{
+                in.getline(line, 256);
+                if(in.eof())
+                    break;
+                stringstream ss;
+                ss << line;
+                if(ss.str().size() == 0)
+                    break;
+                string nameA;
+                string nameS1;
+                string nameS2;
+                double cost;
+                double resource;
+                ss >> nameA;
+                ss >> nameS1;
+                ss >> nameS2;
+                ss >> cost;
+                ss >> resource;
+                std::cout << "[" << ss.str().size() << "]";
+                std::cout << "\t" << nameA << "\t" << nameS1 << "\t" << nameS2 << "\t" << cost << "\t" << resource << endl;
+
+                G.add_arete(nameS1, nameS2, cost, resource);
+            }while(true);
+        }
+//        if(string(line) == string("sectionGraphes")){
+//        }
+    }
+}
+
+
+
 
 void baptiste(){
 
@@ -147,15 +250,57 @@ void tuto_io_graphe(){
     cout << (string) G << endl; //format des operator string()
 
     //Sauvegarde d'un graphe dans un fichier
-    //... I'm working on...
+    f.open("testDeSortie.gpr", ios_base::out);
+    f << G;
+    f.close();
+    cout << "-------------------------------" << endl;
+}
+
+
+void connexionEtDessin(){
+
+    //Lecture d'un graphe depuis un fichier
+    Graphe G("LOL2");
+    fstream f;
+    f.open("Data/data_VRPTW_10.gpr", ios_base::in);
+//    f.open("Data/data_VRPTW_160_10_5_10.gpr", ios_base::in);
+    if(f.is_open()){
+        f >> G;
+        f.close();
+    }
+    else
+        cout << "open fail" << endl;
+
+    //Affichage d'un graphe
+    cout << "-------------------------------" << endl;
+    cout << "-------------------------------" << endl;
+    cout << G << endl;          //format du prof condencé
+
+
+    //connexion
+    cout << "CouCou CONNEXION !!!" << endl;
+    const string ip = "10.10.130.82";
+    int port = 9111;
+    try{
+        Connexion connect = Connexion(ip, port);
+        DessinManager dm(&connect);
+//        dm.dessinerAretes(G.getVArete());//listes d'arêtes
+        dm.dessinerGraphe(G);//graphe
+
+    }
+    catch(Exception e){
+        cout << e.message << endl;
+    }
+
 }
 
 int main(){
 
 //    baptiste();
-    jonathan();
+//    jonathan();
 
 //    tuto_io_graphe();
+    connexionEtDessin();
 
 
 
