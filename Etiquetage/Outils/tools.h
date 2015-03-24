@@ -1,39 +1,47 @@
 #ifndef TOOLS
 #define TOOLS
 #include <vector>
+#include <iostream>
 #include "../Graphe/etiquette.h"
 using std::vector;
-
+using std::cout;
+using std::endl;
 //fonction pour mesurer le temps d'execution d'une autre fonction
 
 
 //fonction pareto variant 1
 vector<Etiquette*> pareto(const vector<Etiquette*> &list){
+    cout << "entrée : "<< list.size() << endl;
+    vector<Etiquette*> copy = vector<Etiquette*>(list);
     vector<Etiquette*> ret;
-    Etiquette* best = list[0];
-    for(Etiquette* e : list){
-        if(e->domine(*best)){
-            best = e;
-            ret = vector<Etiquette*>();
-            ret.push_back(best);
-        }
-        else{
-            if( ! best->domine(*e)){
-                bool deja = false;
-                for(Etiquette* e2 : ret){
-                    if( *e2 == *e){
-                        deja = true;
-                        break;
-                    }
-                }
-                if( ! deja){
-                    ret.push_back(e);
-                }
+    for(vector<Etiquette*>::iterator best = copy.begin(); best != copy.end() ; best++){
+        for(vector<Etiquette*>::iterator e = best; e != copy.end() ; e++){
+            if(  ! (*best)->domine(**e) and ! (*e)->domine(**best)){
+                ret.push_back(*e);
             }
         }
     }
+    /*
+    for(Etiquette* best: list){
+        for(Etiquette* e : list){
+            if(e->domine(*best)){
+               // best = e;
+                ret = vector<Etiquette*>();
+                ret.push_back(best);
+            }
+            else{
+                if( ! best->domine(*e)){
+                    //TODO: vérif que ce qu'on insert n'est pas déjà dans ret
+                        ret.push_back(e);
+                }
+            }
+        }
+        copy = vector<Etiquette*> (ret);
+        ret = vector<Etiquette*>();
+    }
+    */
+    cout << "sortie : "<< ret.size() <<endl;
 
-  //  ret.push_back(best);
     return ret;
 }
 
