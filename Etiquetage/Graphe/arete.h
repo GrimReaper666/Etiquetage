@@ -39,7 +39,7 @@ public:
     string toString(bool rouge = true)const {
         ostringstream ser;
         ser.flush();
-        ser << "segment: "<< (rouge?"#FF0000":"#000000") << ", ";//black
+        ser << "segment: "<< (rouge?"#ff0000":"#000000") << ", ";//black
         ser << from->toString() << ", " << to->toString();
         return ser.str();
     }

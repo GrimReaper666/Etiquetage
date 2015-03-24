@@ -19,7 +19,7 @@ _connexion(c){}
 void DessinManager::dessinerAretes(const vector<Arete> &va, bool graphe = true) const{
     for(Arete a : va){
         string message = a.toString(!graphe);
-        cout << message;
+//        cout << message;
         _connexion->envoyer(message.c_str());
         if( ! graphe){
             stringstream ss;
@@ -28,18 +28,18 @@ void DessinManager::dessinerAretes(const vector<Arete> &va, bool graphe = true) 
             ss << ", ";
             ss << (a.to->max_resource*6-300);
             message = ss.str();
-            cout << message << endl;
+//            cout << message << endl;
             _connexion->envoyer(message.c_str());
-            cout <<endl << message <<endl;
+//            cout <<endl << message <<endl;
             if (_connexion->recevoir() != 0){
-                cout << "le serveur a bien reçu le texte" << endl;
+//                cout << "le serveur a bien reçu le texte" << endl;
             }
             else{
                 cout << "il y a eu une Exception lors de l'envoie" << endl;
             }
         }
         if (_connexion->recevoir() != 0){
-            cout << "le serveur a bien reçu le segment" << endl;
+//            cout << "le serveur a bien reçu le segment" << endl;
         }
         else{
             cout << "il y a eu une Exception lors de l'envoie" << endl;

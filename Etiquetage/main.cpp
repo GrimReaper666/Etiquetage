@@ -26,7 +26,7 @@ void operator>>(fstream& in, Graphe& G)
     while(!in.eof()){
         in.getline(line, 256);
 
-        std::cout << line << std::endl;
+//        std::cout << line << std::endl;
 
         if(string(line) == string("sectionSommets")){
             do{
@@ -43,8 +43,7 @@ void operator>>(fstream& in, Graphe& G)
                 ss >> sname;
                 ss >> min;
                 ss >> max;
-                std::cout << "[" << ss.str().size() << "]";
-                std::cout << "\t" << sname << "\t" << min << "\t" << max << endl;
+//                std::cout << sname << "\t" << min << "\t" << max << endl;
 
                 Sommet s(sname, min, max);
 //                s.add_tag(Etiquette(&s, cost, resources));
@@ -94,8 +93,7 @@ void operator>>(fstream& in, Graphe& G)
                 ss >> nameS2;
                 ss >> cost;
                 ss >> resource;
-                std::cout << "[" << ss.str().size() << "]";
-                std::cout << "\t" << nameA << "\t" << nameS1 << "\t" << nameS2 << "\t" << cost << "\t" << resource << endl;
+//                std::cout << nameA << "\t" << nameS1 << "\t" << nameS2 << "\t" << cost << "\t" << resource << endl;
 
                 G.add_arete(nameS1, nameS2, cost, resource);
             }while(true);
@@ -331,14 +329,14 @@ int main(){
 /*
 int main(int argc, char* argv[])
 {
-//    string path = "Data/data_VRPTW_10.gpr";
-    string path = "Data/data_VRPTW_160_10_5_10.gpr";
+    string path = "Data/data_VRPTW_10.gpr";
+//    string path = "Data/data_VRPTW_160_10_5_10.gpr";
     cout << endl << "\t\tPROJET RO" << endl << endl;
 
 //Récupération du chemin du graphe à ouvrir
     if(argc == 1){
         //demande de rentrer le nom du graphe à lire
-        cout << " Entrez le nom du fichier contenant le graphe a ouvrir : ";
+        cout << "Entrez le nom du fichier contenant le graphe a ouvrir : ";
 //        cin >> path;
     }
     else if(argc == 2){
@@ -364,18 +362,23 @@ int main(int argc, char* argv[])
         f.close();
 
 
-        //TODO
-        //insérer ici l'utilisation de l'algo
+//TODO
+        //Calcule de l'algo
+        cout << endl << "[+] Debut du calcule de chemin..." << endl;
+        vector<Arete> chemin = G.correction_etiquette("s0", "p0",&choisir,&pareto);
+//        vector<Arete> chemin = G.correction_etiquette("i1", "i160",&choisir,&pareto);
+        cout << "[+] Fin." << endl;
+        cout << endl << "TODO - sortie timer algo TODO" << endl;
+        //...
 
 
         //Affichage du chemin rendu par l'algo
-        vector<Arete> liste = G.correction_etiquette("i1", "i160",&choisir,&pareto);
         cout << endl << "[+] Chemin rendu par l'algo:" << endl;
         stringstream ss;
-        for(Arete a : liste){
+        for(Arete a : chemin){
             ss << a.to->name << " <- ";
         }
-        ss << liste.back().from->name << endl;
+        ss << chemin.back().from->name << endl;
         cout << ss.str();
 
 
@@ -389,11 +392,13 @@ int main(int argc, char* argv[])
             Connexion connect = Connexion(ip, port);
             DessinManager dm(&connect);
             cout << "\t[+] Connexion reussie." << endl;
+            cout << "\t[+] Envoie des donnees au serveur..." << endl;
             dm.dessinerGraphe(G);//graphe
-            cout << endl << "\t[+] Graphe envoye au serveur. [Rouge]" << endl << endl;
- //TODO !!!
-            //        dm.dessinerAretes(G.getVArete());//listes d'arêtes
-            cout << "\t[+] Chemin parcouru par l'algorithme envoye au serveur. [Noir]" << endl;
+            cout << endl << "\t[+] Graphe envoye au serveur. [Noir]" << endl << endl;
+
+            cout << "\t[+] Envoie des donnees au serveur..." << endl;
+            dm.dessinerAretes(chemin, false);//chemin
+            cout << "\t[+] Chemin parcouru par l'algorithme envoye au serveur. [Rouge]" << endl << endl;
         }
         catch(Exception e){
             cout << endl << e.message << endl;

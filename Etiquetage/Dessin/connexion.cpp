@@ -42,7 +42,7 @@ int Connexion::recevoir()const{
 	if (recv(_sock, reponse, 1, 0) == SOCKET_ERROR){
         throw Exception("La réception de la réponse a échoué");
 	}
-    cout << "reponse: " << reponse[0] << endl;
+//    cout << "reponse: " << reponse[0] << endl;
     return atoi(reponse);
 }
 
