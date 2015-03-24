@@ -22,10 +22,13 @@ void DessinManager::dessinerAretes(const vector<Arete> &va, bool graphe = true) 
         cout << message;
         _connexion->envoyer(message.c_str());
         if( ! graphe){
-            message = "texte: #000000, " + a.to->name + ", ";
-            message += a.to->min_resource;
-            message += ", ";
-            message+= a.to->max_resource;
+            stringstream ss;
+            ss << "texte: #000000, " + a.to->name + ", ";
+            ss << a.to->min_resource;
+            ss << ", ";
+            ss << a.to->max_resource;
+            message = ss.str();
+            cout << message << endl;
             _connexion->envoyer(message.c_str());
             cout <<endl << message <<endl;
             if (_connexion->recevoir() != 0){
