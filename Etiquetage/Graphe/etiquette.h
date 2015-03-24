@@ -31,7 +31,7 @@ public:
     }
 
     ~Etiquette(){}
-
+/*
     bool operator ==(const Etiquette &e)const{
         return from == e.from and to == e.to and cost == e.cost and resources == e.resources;
     }
@@ -39,7 +39,7 @@ public:
     bool operator !=(const Etiquette &e)const{
         return ! (*this==e);
     }
-
+*/
     operator string () const{
        std::ostringstream oss;
        /*
