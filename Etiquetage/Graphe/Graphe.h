@@ -31,9 +31,14 @@ using std::stringstream;
 
 class Graphe{
 
-public:
+private:
+
+
     vector<Sommet*> sommets;
     vector<Arete> aretes;
+    unordered_map< Sommet* , vector<Sommet*> > successeurs;
+
+public:
     string name;
 
     Graphe(const string &s):
@@ -46,8 +51,20 @@ public:
         sommets.push_back(new Sommet(s));
     }
 
+
+    void add_successor( Sommet *from, Sommet *to){
+        if(successeurs.find(from) != successeurs.end()){
+            successeurs[from].push_back(to);
+        }
+        else{
+            successeurs.insert(pair< Sommet*, vector< Sommet* > >(from, vector< Sommet*>() ));
+            successeurs[from].push_back(to);
+        }
+    }
+
     void add_arete(const Arete &a){
         aretes.push_back(a);
+        add_successor(a.from,a.to);
     }
 
     void add_arete(const string &from, const string &to, const double cost, const double resource){
@@ -99,20 +116,6 @@ public:
     }
 
 
-    unordered_map<Sommet*, vector<Sommet*> >* make_successor(){
-        unordered_map< Sommet*, vector<Sommet*> >* ret = new unordered_map<Sommet*, vector<Sommet*> >();
-        for(Arete a :aretes){
-            if(ret->find(a.from) != ret->end()){
-                (*ret)[a.from].push_back(a.to);
-            }
-            else{
-                (*ret).insert(pair<Sommet*, vector<Sommet* > >(a.from, vector<Sommet*>() ));
-                (*ret)[a.from].push_back(a.to);
-            }
-        }
-        return ret;
-    }
-
 
 
     vector<Arete> shortest_path(const Sommet *from, const Sommet *to){
@@ -137,8 +140,7 @@ public:
 
         if(sommets.size() > 0){
             Sommet* source(find_sommet(from)), *puit(find_sommet(to));
-            //crée les successeurs:
-            unordered_map< Sommet* , vector<Sommet*> > successeurs = *make_successor();
+
             //On réinitialise les tags
             for(Sommet* s: sommets){
                 s->tags = vector<Etiquette*>();
@@ -149,33 +151,36 @@ public:
             Sommet* xi = new Sommet();
             source->add_default_tag();
             while(list.size() > 0){
+
                 xi = choisir(list);
-                //supprime xi de list
-                int i = 0;
-                for(Sommet* s: list){
-                    if(s == xi){
-                        list.erase(list.begin() + i);
-                        break;
-                    }
-                    i++;
-                }
+                //TODO: supprimer dans choisir, meilleur perf :)
+                list.erase(std::find(list.begin(),list.end(),xi));
 
                 for(Sommet* xj : successeurs[xi]){
+
                     for(Etiquette* e: xi->tags){
+
                         Arete tmp = get_arete(xi,xj);
-                        if( e->resources + tmp.resource <= xj->best() ){
+                        if( e->resources + tmp.resource <= xj->max_resource ){
+
                             Etiquette e_prime =  Etiquette(e, xj, e->cost + tmp.cost, e->resources + tmp.resource);
                             xj->add_tag(e_prime);
                             Etiquette* e_prime_pointer = xj->tags.back();
                             xj->tags = pareto(xj->tags);
+
                             if(std::find(xj->tags.begin(),xj->tags.end(),e_prime_pointer) != xj->tags.end() ){
-                                list.push_back(xj);
+                                if(std::find(list.begin(),list.end(),xj) == list.end()){
+                                    list.push_back(xj);
+                                }
                             }
+
                         }
                     }
                 }
             }
 
+            xi = NULL;
+            delete xi;
             return shortest_path(source,puit);
         }
         else{

@@ -19,13 +19,22 @@ vector<Etiquette*> pareto(const vector<Etiquette*> &list){
         }
         else{
             if( ! best->domine(*e)){
-                ret.push_back(e);
+                bool deja = false;
+                for(Etiquette* e2 : ret){
+                    if( *e2 == *e){
+                        deja = true;
+                        break;
+                    }
+                }
+                if( ! deja){
+                    ret.push_back(e);
+                }
             }
         }
     }
+
   //  ret.push_back(best);
     return ret;
-    //TODO
 }
 
 //etc...

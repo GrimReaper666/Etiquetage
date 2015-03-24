@@ -17,7 +17,7 @@ void baptiste(){
         f.close();
     }
     else
-        cout << "open fail" << endl;
+        cout << "open fails" << endl;
     vector<Arete> lol =  g.correction_etiquette("i1","i160",&choisir,&pareto);
     for(Arete a : lol){
         cout << a << endl;

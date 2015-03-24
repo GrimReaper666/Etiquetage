@@ -45,6 +45,11 @@ public:
         tags.push_back(new Etiquette(NULL,this,0,0));
     }
 
+    bool operator ==(const Sommet &s)const{
+        return s.name == name;
+    }
+
+
     operator string () const{
        std::ostringstream oss;
        oss << "sommet (" << endl;
@@ -56,7 +61,7 @@ public:
        oss << "))";
        return oss.str();
    }
-
+/*
     double best() const{
         //TODO faire une var membre
         double best = DBL_MAX;
@@ -67,16 +72,13 @@ public:
         }
         return best;
     }
-
+*/
     virtual ~Sommet(){
         for(Etiquette* e: tags){
-           // delete e;
+            delete e;
         }
     }
 
-    bool operator==(const Sommet &s){
-        return s.name == name;
-    }
 
 };
 

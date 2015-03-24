@@ -27,7 +27,17 @@ public:
 
     bool domine(const Etiquette &e){
         return (    (cost < e.cost and resources <= e.resources)
-                or  (cost <= e.cost and resources < e.resources)      );
+                or  (cost = e.cost and resources < e.resources)      );
+    }
+
+    ~Etiquette(){}
+
+    bool operator ==(const Etiquette &e)const{
+        return from == e.from and to == e.to and cost == e.cost and resources == e.resources;
+    }
+
+    bool operator !=(const Etiquette &e)const{
+        return ! (*this==e);
     }
 
     operator string () const{
