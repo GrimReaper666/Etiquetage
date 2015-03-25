@@ -311,7 +311,7 @@ void connexionEtDessin(){
 
 }
 
-
+/*
 
 int main(){
 
@@ -327,7 +327,7 @@ int main(){
 }
 
 
-/*
+*/
 int main(int argc, char* argv[])
 {
     string path = "Data/data_VRPTW_10.gpr";
@@ -338,6 +338,7 @@ int main(int argc, char* argv[])
     if(argc == 1){
         //demande de rentrer le nom du graphe à lire
         cout << "Entrez le nom du fichier contenant le graphe a ouvrir : ";
+//TODO : Décommenter le cin quand plus phase de test
 //        cin >> path;
     }
     else if(argc == 2){
@@ -350,7 +351,6 @@ int main(int argc, char* argv[])
     cout << endl;
     cout << endl << "[+] Chemin vers le graphe a ouvrir :" << endl;
     cout << path << endl;
-//    cin >> path;
 
 
 //Lecture d'un graphe depuis un fichier
@@ -410,4 +410,4 @@ int main(int argc, char* argv[])
 
     return 0;
 }
-*/
+
