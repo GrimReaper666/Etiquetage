@@ -4,6 +4,7 @@
 #include "Outils/exception.h"
 #include "Dessin/connexion.h"
 #include "Dessin/dessinManager.h"
+#include "Graphe/Graphe.h"
 #include <time.h>
 
 using namespace std;
@@ -105,9 +106,10 @@ void operator>>(fstream& in, Graphe& G)
 }
 
 clock_t get_cpu_time(){
-#ifdef _WIN32_
+#ifdef _WIN32
 #include <windows.h>
-    return GetProcessTimes() //TODO ça a l'air relou
+    return 0;
+    //return GetProcessTimes() //TODO ça a l'air relou
 #else
     return clock();
 #endif
@@ -115,7 +117,7 @@ clock_t get_cpu_time(){
 }
 
 
-void test_perf(const string &file_name, const string &from, const string &to,unsigned int nb_iter = 2){
+void test_perf(const string &file_name, const string &from, const string &to,unsigned int nb_iter = 1){
     Graphe g("LOL2");
     fstream f;
     f.open(file_name, ios_base::in);
@@ -130,21 +132,13 @@ void test_perf(const string &file_name, const string &from, const string &to,uns
     }
     clock_t total = 0;
     long double moyenne = 0;
-    int failed = 1;
-    while(moyenne == 0){
-        for(unsigned int i = 0 ; i < nb_iter ; i++){
-            auto start = get_cpu_time();
-            for(int j = 0 ; j <failed ; j++){
-                g.correction_etiquette(from,to,&choisir_cout_min,&pareto);
-            }
-            total+= get_cpu_time() -start;
-        }
-        moyenne = total/(long double)nb_iter;
-        if(moyenne == 0){
-            failed += 10;
-        }
+    for(unsigned int i = 0 ; i < nb_iter ; i++){
+        clock_t start = get_cpu_time();
+        g.correction_etiquette(from,to,&choisir_cout_min,&pareto,true);
+        total+= get_cpu_time() -start;
     }
-    cout << "une moyenne de: " << (moyenne/CLOCKS_PER_SEC)*1000 << " millisecondes " << ( (failed == 1)? "" : "pour "+std::to_string(failed)+" executions") <<endl;
+    moyenne = total/(long double)nb_iter;
+    cout << "une moyenne de: " << (moyenne) << " millisecondes " <<endl;
 }
 
 /**
@@ -159,7 +153,7 @@ void test_all(){
 
     test_perf("Data/data_VRPTW_10_3_2_4.gpr","i1","i10");
 
-    // test_perf("Data/data_VRPTW_10_10_5_5_3.gpr","i1","i10");
+    //test_perf("Data/data_VRPTW_10_10_5_5_3.gpr","i1","i10");
 
 
 
@@ -359,7 +353,7 @@ void connexionEtDessin(){
         DessinManager dm(&connect);
 //        dm.dessinerAretes(G.getVArete());//listes d'arêtes
       //  dm.dessinerGraphe(G);//graphe
-        dm.dessinerAretes(G.correction_etiquette("s0","p0",&choisir_tete_liste,&pareto),false);
+        dm.dessinerAretes(G.correction_etiquette("s0","p0",&choisir_tete_liste,&pareto, true),false);
     }
     catch(Exception e){
         cout << e.message << endl;
@@ -368,7 +362,7 @@ void connexionEtDessin(){
 }
 
 
-
+/*
 int main(){
 
     baptiste();
@@ -382,87 +376,200 @@ int main(){
     return 0;
 }
 
-/*
+*/
 
 int main(int argc, char* argv[])
 {
-    string path = "Data/data_VRPTW_10.gpr";
-//    string path = "Data/data_VRPTW_160_10_5_10.gpr";
-    cout << endl << "\t\tPROJET RO" << endl << endl;
+    string path = "Data/data_VRPTW_10_3_2_4.gpr";
+    string s = "i1", p = "i10";
+    bool end = false;
+    while(!end){
+        char mess = 'z';
 
-//Récupération du chemin du graphe à ouvrir
-    if(argc == 1){
-        //demande de rentrer le nom du graphe à lire
-        cout << "Entrez le nom du fichier contenant le graphe a ouvrir : ";
-//TODO : Décommenter le cin quand plus phase de test
-//        cin >> path;
-    }
-    else if(argc == 2){
-        //ouvrir le graphe donné en paramètre
-        stringstream ss;
-        ss << argv[1];
-        path = ss.str();
-    }
-
-    cout << endl;
-    cout << endl << "[+] Chemin vers le graphe a ouvrir :" << endl;
-    cout << path << endl;
+        cout << endl << "\t\tPROJET RO" << endl << endl;
 
 
-//Lecture d'un graphe depuis un fichier
-    Graphe G("LOL");
-    fstream f;
-    f.open(path.c_str(), ios_base::in);
-    if(f.is_open()){
-        cout << endl << "[+] Ouverture du fichier reussi." << endl;
-        f >> G;
-        f.close();
-
-
-//TODO
-        //Calcule de l'algo
-        cout << endl << "[+] Debut du calcule de chemin..." << endl;
-        vector<Arete> chemin = G.correction_etiquette("s0", "p0",&choisir_cout_min,&pareto);
-//        vector<Arete> chemin = G.correction_etiquette("i1", "i160",&choisir,&pareto);
-        cout << "[+] Fin." << endl;
-        cout << endl << "TODO - sortie timer algo TODO" << endl;
-        //...
-
-
-        //Affichage du chemin rendu par l'algo
-        cout << endl << "[+] Chemin rendu par l'algo:" << endl;
-        stringstream ss;
-        for(Arete a : chemin){
-            ss << a.to->name << " <- ";
+    //Récupération du chemin du graphe à ouvrir
+        bool defaut;
+        if(argc == 1 ){
+            while(mess != 'o' and mess != 'n'){
+                cout << "voulez vous le chemin graphe par défaut: " <<endl<< path <<endl<< " (o/n) ?" << endl;
+                cin >> mess;
+                switch (mess) {
+                case 'o':
+                    defaut = true;
+                    break;
+                case 'n':
+                    defaut = false;
+                    break;
+                }
+            }
+            if( ! defaut){
+                cout << "Entrez le nom du fichier contenant le graphe a ouvrir : ";
+                cin >> path;
+            }
         }
-        ss << chemin.back().from->name << endl;
-        cout << ss.str();
-
-
-        //Connexion au serveur de dessin
-        cout << endl << endl << "[+] Connexion au serveur de dessin : " << endl;
-        const string ip = "127.0.0.1";
-        cout << "\tIP = " << ip << endl;
-        int port = 9111;
-        cout << "\tPort = " << port << endl << endl;
-        try{
-            Connexion connect = Connexion(ip, port);
-            DessinManager dm(&connect);
-            cout << "\t[+] Connexion reussie." << endl;
-            cout << "\t[+] Envoie des donnees au serveur..." << endl;
-            dm.dessinerGraphe(G);//graphe
-            cout << endl << "\t[+] Graphe envoye au serveur. [Noir]" << endl << endl;
-
-            cout << "\t[+] Envoie des donnees au serveur..." << endl;
-            dm.dessinerAretes(chemin, false);//chemin
-            cout << "\t[+] Chemin parcouru par l'algorithme envoye au serveur. [Rouge]" << endl << endl;
+        else if(argc == 2){
+            //ouvrir le graphe donné en paramètre
+            stringstream ss;
+            ss << argv[1];
+            path = ss.str();
         }
-        catch(Exception e){
-            cout << endl << e.message << endl;
+
+        cout << endl;
+        cout << endl << "[+] Chemin vers le graphe a ouvrir :" << endl;
+
+        cout << path << endl;
+
+
+    //Lecture d'un graphe depuis un fichier
+        Graphe G("LOL");
+        fstream f;
+        f.open(path.c_str(), ios_base::in);
+        if(f.is_open()){
+            cout << endl << "[+] Ouverture du fichier reussi." << endl;
+            f >> G;
+            f.close();
+
+
+            //Calcule de l'algo
+            bool borne;
+            mess = 'z';
+            while(mess != 'o' and mess != 'n'){
+                cout << "voulez vous prendre en compte la borne inférieur (o/n) ?" << endl;
+                cin >> mess;
+                switch (mess) {
+                case 'o':
+                    borne = true;
+                    break;
+                case 'n':
+                    borne = false;
+                    break;
+                }
+            }
+            Sommet* (*choisir)(vector<Sommet*> &);
+            mess = 'z';
+            while(mess != 'c' and mess != 'p'){
+                cout << "preferez vous choisir le sommet qui contient la meilleur étiquette ou celui en tête de liste(c/p) ?" <<endl;
+                cin >> mess;
+                switch(mess){
+                case 'c':
+                    choisir = &choisir_cout_min;
+                    break;
+                case 'p':
+                    choisir = &choisir_tete_liste;
+                    break;
+                }
+            }
+
+            bool echec = true;
+            vector<Arete> chemin;
+            mess = 'z';
+            bool s_p = false;
+
+            while(echec){
+                echec = false;
+                if( defaut){
+                    while(mess != 'o' and mess != 'n'){
+                        cout << "voulez vous utiliser les sources et puits par défaut(o/n) ?" << endl;
+                        cin >> mess;
+                        switch (mess) {
+                        case 'o':
+                            s_p = true;
+                            break;
+                        case 'n':
+                            s_p= false;
+                            break;
+                        }
+                    }
+                }
+                if( ! s_p){
+                    cout << "entrez le nom de la source: ";
+                    cin >>s;
+                    cout << "entrez le nom du puit: ";
+                    cin >> p;
+                }
+                try{
+                    cout << endl << "[+] Debut du calcule de chemin..." << endl;
+                    chemin = G.correction_etiquette(s, p, choisir, &pareto, borne);
+                    cout << "[+] Fin." << endl;
+                }
+                catch( Exception e){
+                    cout << e.message << endl;
+                    echec = true;
+                }
+            }
+
+            //Affichage du chemin rendu par l'algo
+            cout << endl << "[+] Chemin rendu par l'algo:" << endl;
+            stringstream ss;
+            for(Arete a : chemin){
+                ss << a.to->name << " <- ";
+            }
+            ss << chemin.back().from->name << endl;
+            cout << ss.str();
+
+
+            //Connexion au serveur de dessin
+            bool dessin;
+            mess = 'z';
+            while(mess != 'o' and mess != 'n'){
+                cout << "voulez vous dessiner le graphe sur le serveur de dessin(o/n) ?" <<endl;
+                cin >> mess;
+                switch(mess){
+                case 'o':
+                    dessin = true;
+                    break;
+                case 'n':
+                    dessin = false;
+                    break;
+                }
+            }
+            if(dessin){
+                cout << endl << endl << "[+] Connexion au serveur de dessin : " << endl;
+                const string ip = "127.0.0.1";
+                cout << "\tIP = " << ip << endl;
+                int port = 9111;
+                cout << "\tPort = " << port << endl << endl;
+                try{
+                    Connexion connect = Connexion(ip, port);
+                    DessinManager dm(&connect);
+                    cout << "\t[+] Connexion reussie." << endl;
+                    cout << "\t[+] Envoie des donnees au serveur..." << endl;
+                    dm.dessinerGraphe(G);//graphe
+                    cout << endl << "\t[+] Graphe envoye au serveur. [Noir]" << endl << endl;
+
+                    cout << "\t[+] Envoie des donnees au serveur..." << endl;
+                    dm.dessinerAretes(chemin, false);//chemin
+                    cout << "\t[+] Chemin parcouru par l'algorithme envoye au serveur. [Rouge]" << endl << endl;
+                }
+                catch(Exception e){
+                    cout << endl << e.message << endl;
+                }
+
+            }
+        }
+        else{
+            cout << "\t[-] Fichier NON ouvert." << endl;
+        }
+
+
+
+        //fin
+        mess = 'z';
+        while(mess != 'o' and mess != 'n'){
+            cout << "voulez vous quitter le programme (o/n) ?" << endl;
+            cin >> mess;
+            switch (mess) {
+            case 'o':
+                end = true;
+                break;
+            case 'n':
+                end = false;
+                break;
+            }
         }
     }
-    else
-        cout << "\t[-] Fichier NON ouvert." << endl;
 
     return 0;
 }
@@ -470,4 +577,4 @@ int main(int argc, char* argv[])
 
 
 
-*/
+

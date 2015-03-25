@@ -1,10 +1,7 @@
 #ifndef GRAPHE_H
 #define GRAPHE_H
 #include <vector>
-#include <fstream>
 #include <string>
-#include <ostream>
-#include <istream>
 #include <sstream>
 #include "../Outils/exception.h"
 #include "sommet.h"
@@ -12,22 +9,12 @@
 #include <unordered_map>
 #include <algorithm>
 #include <utility>
-#include <streambuf>
-#include <math.h>
 #include "etiquette.h"
 
 using std::unordered_map;
-using std::max;
-using std::pair;
-using std::fstream;
 using std::ostringstream;
 using std::endl;
-using std::ostream;
-using std::ofstream;
-using std::istream;
 using std::string;
-using std::streambuf;
-using std::stringstream;
 
 
 
@@ -78,7 +65,7 @@ public:
             successeurs[from].push_back(to);
         }
         else{
-            successeurs.insert(pair< Sommet*, vector< Sommet* > >(from, vector< Sommet*>() ));
+            successeurs[from] = vector< Sommet*>();
             successeurs[from].push_back(to);
         }
     }
@@ -164,9 +151,9 @@ public:
      * @param pareto
      * @return
      */
-    vector<Arete> correction_etiquette(const string &from, const string &to,Sommet* choisir(const vector<Sommet*> &list), vector<Etiquette*> pareto(const vector<Etiquette*> &list) ){
+    vector<Arete> correction_etiquette(const string &from, const string &to,Sommet* choisir(vector<Sommet*> &list), void pareto(vector<Etiquette*> &list), bool borne_min ){
         Sommet* f(get_sommet(from)) , *t(get_sommet(to));
-        return correction_etiquette(*f,*t,choisir,pareto);
+        return correction_etiquette(*f,*t,choisir,pareto,borne_min);
     }
 
 
@@ -179,7 +166,6 @@ public:
      * @return
      */
     vector<Arete> shortest_path( const Sommet *to){
-        //TODO: variantes
         vector<Arete> path;
         const Etiquette* best = to->tags[0];
         for(Etiquette* e : to->tags){
@@ -205,7 +191,7 @@ public:
      * @param pareto
      * @return
      */
-    vector<Arete> correction_etiquette(const Sommet &from, const Sommet &to,Sommet* choisir(const vector<Sommet*> &list), vector<Etiquette*> pareto(const vector<Etiquette*> &list) ){
+    vector<Arete> correction_etiquette(const Sommet &from, const Sommet &to,Sommet* choisir(vector<Sommet*> &list), void pareto(vector<Etiquette*> &list), bool borne_min ){
 
         if(sommets.size() > 0){
 
@@ -226,8 +212,6 @@ public:
             while(list.size() > 0){
 
                 xi = choisir(list);
-                //TODO: supprimer dans choisir, meilleur perf :)
-                list.erase(std::find(list.begin(),list.end(),xi));
 
                 for(Sommet* xj : successeurs[xi]){
 
@@ -235,14 +219,15 @@ public:
 
                         Arete tmp = get_arete(xi,xj);
                         Etiquette e_prime(e, xj, e->cost + tmp.cost, e->resources + tmp.resource);
-                        if(e_prime.resources < xj->min_resource){
+                        if(borne_min && e_prime.resources < xj->min_resource){
                             e_prime.resources = xj->min_resource;
                         }
                         if( e_prime.resources <= xj->max_resource ){
 
                             xj->add_tag(e_prime);
                             Etiquette* e_prime_pointer = xj->tags.back();
-                            xj->tags = pareto(xj->tags);
+                            //xj->tags = pareto(xj->tags);
+                            pareto(xj->tags);
                             //on test si e_prime_pointer est bien dans la liste retournée par pareto, comme l'orde est conservé, c'est le dernier de la liste
                             if(e_prime_pointer == xj->tags.back()){
                                 if(std::find(list.begin(),list.end(),xj) == list.end()){

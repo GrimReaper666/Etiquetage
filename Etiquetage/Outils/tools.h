@@ -1,20 +1,13 @@
 #ifndef TOOLS
 #define TOOLS
 #include <vector>
-#include <iostream>
-#include <algorithm>
-#include <chrono>
 #include <cfloat>
-#include <functional>
 #include "../Graphe/etiquette.h"
 #include "../Graphe/sommet.h"
+#include "../Graphe/Graphe.h"
 using std::vector;
 using std::cout;
 using std::endl;
-using std::chrono::milliseconds;
-using std::chrono::system_clock;
-using std::chrono::duration;
-using std::chrono::duration_cast;
 
 
 /**
@@ -22,20 +15,19 @@ using std::chrono::duration_cast;
  * @param list
  * @return la liste des sommets non dominés dans le même ordre que celle passé en param
  */
-inline vector<Etiquette*> pareto(const vector<Etiquette*> &list){
+inline void pareto(vector<Etiquette*> &list){
 
-    vector<Etiquette*> ret = vector<Etiquette*>(list);
-    vector<Etiquette*>::iterator prem = ret.begin(), sec;
-    while(prem != ret.end()){
+    vector<Etiquette*>::iterator prem = list.begin(), sec;
+    while(prem != list.end()){
         sec = prem + 1;
-        while(prem != ret.end() and sec != ret.end()){
+        while(sec != list.end()){
             if((*prem)->domine(**sec)){
                 delete *sec;
-                ret.erase(sec);
+                list.erase(sec);
             }
             else if((*sec)->domine(**prem)){
                 delete *prem;
-                ret.erase(prem);
+                list.erase(prem);
                 sec = prem+1;
             }
             else{
@@ -82,30 +74,42 @@ inline vector<Etiquette*> pareto(const vector<Etiquette*> &list){
     }
      */
 
-    return ret;
+   // return ret;
 }
 
 //etc...
 //fonction choisir variante 1
-inline Sommet* choisir_tete_liste(const vector<Sommet*> &list){
-    return list[0];
+inline Sommet* choisir_tete_liste(vector<Sommet*> &list){
+    Sommet* ret = list.front();
+    list.erase(list.begin());
+    return ret;
 }
 
+
+
 //fonction choisir variante 2
-inline Sommet* choisir_cout_min(const vector<Sommet*> &list){
-    double cost = DBL_MAX;
+ inline Sommet* choisir_cout_min(vector<Sommet*> &list){
+    double cost{DBL_MAX};
     Sommet* best;
+    size_t pos = 0, i = 0;
     for(Sommet* s : list){
         if(s->best){
             if(s->best->cost < cost){
                 best = s;
                 cost = s->best->cost;
+                pos = i;
             }
         }
+        i++;
     }
+    list.erase(list.begin()+pos);
     return best;
 }
 //etc
+
+
+
+
 
 
 #endif // TOOLS
