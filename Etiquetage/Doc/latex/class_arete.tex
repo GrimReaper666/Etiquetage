@@ -1,0 +1,140 @@
+\hypertarget{class_arete}{\section{Arete Class Reference}
+\label{class_arete}\index{Arete@{Arete}}
+}
+
+
+The \hyperlink{class_arete}{Arete} class Cette classe sert à la représentation d'un \hyperlink{class_graphe}{Graphe}. Elle est définie par les deux sommets qu'elle relit, ansi qu'un coût et une ressource exprimé par des réels.  
+
+
+
+
+{\ttfamily \#include $<$Arete.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_arete_acdc3cd559c105c002ad10e66a2641ca9}{Arete} (\hyperlink{class_sommet}{Sommet} $\ast$\hyperlink{class_arete_abe2d1eac01195690e46bf61faab9493b}{from}, \hyperlink{class_sommet}{Sommet} $\ast$\hyperlink{class_arete_ae260ae83d6bbaaaf5547107fc40fec49}{to}, const double \&\hyperlink{class_arete_a082c784fbf985a8a991f3c035308fc0c}{cost}, const double \&\hyperlink{class_arete_a2f4d932778ea005c550473b39c5d7221}{resource})
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_arete}{Arete}. \end{DoxyCompactList}\item 
+\hyperlink{class_arete_a27274ab782a462895e8218f41e957323}{operator string} () const 
+\begin{DoxyCompactList}\small\item\em operator string \end{DoxyCompactList}\item 
+\hyperlink{class_arete_ac557e81c9b02f266cadd55fd2952f377}{Arete} (\hyperlink{class_sommet}{Sommet} $\ast$\hyperlink{class_arete_abe2d1eac01195690e46bf61faab9493b}{from}, \hyperlink{class_sommet}{Sommet} $\ast$\hyperlink{class_arete_ae260ae83d6bbaaaf5547107fc40fec49}{to}, const double \&\hyperlink{class_arete_a082c784fbf985a8a991f3c035308fc0c}{cost})
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_arete}{Arete}. \end{DoxyCompactList}\item 
+string \hyperlink{class_arete_af0a0e602373b28c3eb298ffd95c23aca}{to\+String} (bool rouge=true) const 
+\begin{DoxyCompactList}\small\item\em to\+String \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_sommet}{Sommet} $\ast$ \hyperlink{class_arete_abe2d1eac01195690e46bf61faab9493b}{from}
+\item 
+\hyperlink{class_sommet}{Sommet} $\ast$ \hyperlink{class_arete_ae260ae83d6bbaaaf5547107fc40fec49}{to}
+\item 
+double \hyperlink{class_arete_a082c784fbf985a8a991f3c035308fc0c}{cost}
+\item 
+double \hyperlink{class_arete_a2f4d932778ea005c550473b39c5d7221}{resource}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{class_arete}{Arete} class Cette classe sert à la représentation d'un \hyperlink{class_graphe}{Graphe}. Elle est définie par les deux sommets qu'elle relit, ansi qu'un coût et une ressource exprimé par des réels. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_arete_acdc3cd559c105c002ad10e66a2641ca9}{\index{Arete@{Arete}!Arete@{Arete}}
+\index{Arete@{Arete}!Arete@{Arete}}
+\subsubsection[{Arete}]{\setlength{\rightskip}{0pt plus 5cm}Arete\+::\+Arete (
+\begin{DoxyParamCaption}
+\item[{{\bf Sommet} $\ast$}]{from, }
+\item[{{\bf Sommet} $\ast$}]{to, }
+\item[{const double \&}]{cost, }
+\item[{const double \&}]{resource}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_arete_acdc3cd559c105c002ad10e66a2641ca9}
+
+
+\hyperlink{class_arete}{Arete}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em from} & \hyperlink{class_sommet}{Sommet} de provenance \\
+\hline
+{\em to} & \hyperlink{class_sommet}{Sommet} de destination \\
+\hline
+{\em cost} & Coût de déplacement \\
+\hline
+{\em resource} & Ressource de déplacement \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_arete_ac557e81c9b02f266cadd55fd2952f377}{\index{Arete@{Arete}!Arete@{Arete}}
+\index{Arete@{Arete}!Arete@{Arete}}
+\subsubsection[{Arete}]{\setlength{\rightskip}{0pt plus 5cm}Arete\+::\+Arete (
+\begin{DoxyParamCaption}
+\item[{{\bf Sommet} $\ast$}]{from, }
+\item[{{\bf Sommet} $\ast$}]{to, }
+\item[{const double \&}]{cost}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_arete_ac557e81c9b02f266cadd55fd2952f377}
+
+
+\hyperlink{class_arete}{Arete}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em from} & \hyperlink{class_sommet}{Sommet} de provenance \\
+\hline
+{\em to} & \hyperlink{class_sommet}{Sommet} de destination \\
+\hline
+{\em cost} & Coût de déplacement \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_arete_a27274ab782a462895e8218f41e957323}{\index{Arete@{Arete}!operator string@{operator string}}
+\index{operator string@{operator string}!Arete@{Arete}}
+\subsubsection[{operator string}]{\setlength{\rightskip}{0pt plus 5cm}Arete\+::operator string (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_arete_a27274ab782a462895e8218f41e957323}
+
+
+operator string 
+
+\hypertarget{class_arete_af0a0e602373b28c3eb298ffd95c23aca}{\index{Arete@{Arete}!to\+String@{to\+String}}
+\index{to\+String@{to\+String}!Arete@{Arete}}
+\subsubsection[{to\+String}]{\setlength{\rightskip}{0pt plus 5cm}string Arete\+::to\+String (
+\begin{DoxyParamCaption}
+\item[{bool}]{rouge = {\ttfamily true}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_arete_af0a0e602373b28c3eb298ffd95c23aca}
+
+
+to\+String 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rouge} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_arete_a082c784fbf985a8a991f3c035308fc0c}{\index{Arete@{Arete}!cost@{cost}}
+\index{cost@{cost}!Arete@{Arete}}
+\subsubsection[{cost}]{\setlength{\rightskip}{0pt plus 5cm}double Arete\+::cost}}\label{class_arete_a082c784fbf985a8a991f3c035308fc0c}
+\hypertarget{class_arete_abe2d1eac01195690e46bf61faab9493b}{\index{Arete@{Arete}!from@{from}}
+\index{from@{from}!Arete@{Arete}}
+\subsubsection[{from}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Sommet}$\ast$ Arete\+::from}}\label{class_arete_abe2d1eac01195690e46bf61faab9493b}
+\hypertarget{class_arete_a2f4d932778ea005c550473b39c5d7221}{\index{Arete@{Arete}!resource@{resource}}
+\index{resource@{resource}!Arete@{Arete}}
+\subsubsection[{resource}]{\setlength{\rightskip}{0pt plus 5cm}double Arete\+::resource}}\label{class_arete_a2f4d932778ea005c550473b39c5d7221}
+\hypertarget{class_arete_ae260ae83d6bbaaaf5547107fc40fec49}{\index{Arete@{Arete}!to@{to}}
+\index{to@{to}!Arete@{Arete}}
+\subsubsection[{to}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Sommet} $\ast$ Arete\+::to}}\label{class_arete_ae260ae83d6bbaaaf5547107fc40fec49}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Graphe/\hyperlink{_arete_8h}{Arete.\+h}\end{DoxyCompactItemize}

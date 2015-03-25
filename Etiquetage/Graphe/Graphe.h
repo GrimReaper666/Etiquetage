@@ -29,6 +29,11 @@ using std::stringstream;
 
 
 
+/**
+ * @brief The Graphe class
+ * Cette classe représente un graphe.
+ * Elle est définie par une liste de sommets ainsi qu'une liste d'arêtes.
+ */
 class Graphe{
 
 private:
@@ -39,9 +44,18 @@ private:
 public:
     string name;
 
+    /**
+     * @brief Graphe
+     * @param s
+     */
     Graphe(const string &s):
         name(s){}
 
+    /**
+     * @brief add_sommet
+     * Ajoute un sommet au graphe.
+     * @param s
+     */
     void add_sommet(const Sommet &s){
         if( find_sommet(s.name) != NULL){
          throw Exception("sommet déjà existant");
@@ -50,6 +64,11 @@ public:
     }
 
 
+    /**
+     * @brief add_successor
+     * @param from
+     * @param to
+     */
     void add_successor( Sommet *from, Sommet *to){
         if(successeurs.find(from) != successeurs.end()){
             successeurs[from].push_back(to);
@@ -60,23 +79,45 @@ public:
         }
     }
 
+    /**
+     * @brief add_arete
+     * Ajoute une arête au graphe
+     * @param a
+     */
     void add_arete(const Arete &a){
         aretes.push_back(a);
         add_successor(a.from,a.to);
     }
 
+    /**
+     * @brief add_arete
+     * Ajoute une arête au graphe
+     * @param from
+     * @param to
+     * @param cost
+     * @param resource
+     */
     void add_arete(const string &from, const string &to, const double cost, const double resource){
         add_arete(Arete(get_sommet(from),get_sommet(to),cost,resource));
 
     }
 
 
+    /**
+     * @brief ~Graphe
+     */
     virtual ~Graphe(){
         for(Sommet* s: sommets){
             delete s;
         }
     }
 
+    /**
+     * @brief find_sommet
+     * Recherche si le sommet identifié par son nom est contenu dans le graphe.
+     * @param name
+     * @return
+     */
     Sommet* find_sommet(const string &name){
         for(Sommet* s: sommets){
             if(s->name == name){
@@ -108,6 +149,14 @@ public:
         return s;
     }
 
+    /**
+     * @brief correction_etiquette
+     * @param from
+     * @param to
+     * @param choisir
+     * @param pareto
+     * @return
+     */
     vector<Arete> correction_etiquette(const string &from, const string &to,Sommet* choisir(const vector<Sommet*> &list), vector<Etiquette*> pareto(const vector<Etiquette*> &list) ){
         Sommet* f(get_sommet(from)) , *t(get_sommet(to));
         return correction_etiquette(*f,*t,choisir,pareto);
@@ -116,6 +165,12 @@ public:
 
 
 
+    /**
+     * @brief shortest_path
+     * @param from
+     * @param to
+     * @return
+     */
     vector<Arete> shortest_path(const Sommet *from, const Sommet *to){
         //TODO: variantes + virer from
         vector<Arete> path;
@@ -135,6 +190,14 @@ public:
         return path;
     }
 
+    /**
+     * @brief correction_etiquette
+     * @param from
+     * @param to
+     * @param choisir
+     * @param pareto
+     * @return
+     */
     vector<Arete> correction_etiquette(const Sommet &from, const Sommet &to,Sommet* choisir(const vector<Sommet*> &list), vector<Etiquette*> pareto(const vector<Etiquette*> &list) ){
 
         if(sommets.size() > 0){
@@ -190,6 +253,13 @@ public:
 
 
 
+    /**
+     * @brief get_arete
+     * Retourne une arête identifiée par son sommet source et destination
+     * @param from
+     * @param to
+     * @return
+     */
     Arete get_arete(const Sommet *from, const Sommet *to){
         for(Arete a : aretes){
             if(a.from == from and a.to == to){
@@ -199,11 +269,21 @@ public:
         throw Exception("l'arete " + from->name + " => " + to->name + " n'existe pas dans le graphe");
     }
 
+    /**
+     * @brief get_arete
+     * Retourne une arête identifiée par le nom de son sommet source et destination
+     * @param from
+     * @param to
+     * @return
+     */
     Arete get_arete(const string &from, const string &to){
         return get_arete(find_sommet(from),find_sommet(to));
     }
 
 
+    /**
+     * @brief operator string
+     */
     operator string () const{
         ostringstream oss;
         oss << "GRAPHE (" << endl;
@@ -224,6 +304,11 @@ public:
         return oss.str();
     }
 
+    /**
+     * @brief formatDuProf
+     * @param G
+     * @return
+     */
     static string formatDuProf(const Graphe& G){
         ostringstream oss;
         oss << "# Graphe N = " << G.sommets.size() << " ; M = " << G.aretes.size() << endl;
@@ -253,6 +338,10 @@ public:
         return oss.str();
     }
 
+    /**
+     * @brief getVArete
+     * @return
+     */
     const vector<Arete>& getVArete() const{
         return this->aretes;
     }

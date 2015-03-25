@@ -1,0 +1,68 @@
+\hypertarget{vecteur2d_8h}{\section{Outils/vecteur2d.h File Reference}
+\label{vecteur2d_8h}\index{Outils/vecteur2d.\+h@{Outils/vecteur2d.\+h}}
+}
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$cmath$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_vecteur2_d}{Vecteur2\+D}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+const \hyperlink{class_vecteur2_d}{Vecteur2\+D} \hyperlink{vecteur2d_8h_a1d4d71b477f6ed1cb4137da40bfa87de}{operator$\ast$} (const double \&a, const \hyperlink{class_vecteur2_d}{Vecteur2\+D} \&u)
+\item 
+double \hyperlink{vecteur2d_8h_a65fe9f4f5afe1bc4b2cad2d85c5b8095}{norme\+Sup} (const \hyperlink{class_vecteur2_d}{Vecteur2\+D} \&u)
+\item 
+ostream \& \hyperlink{vecteur2d_8h_a62103e3ee59519a5bc33e0bdc0728699}{operator$<$$<$} (ostream \&os, const \hyperlink{class_vecteur2_d}{Vecteur2\+D} \&u)
+\item 
+void \hyperlink{vecteur2d_8h_a65e281a269ab67dd4281741959a9422e}{fusionne} (const double x\mbox{[}$\,$\mbox{]}, const double y\mbox{[}$\,$\mbox{]}, int m, \hyperlink{class_vecteur2_d}{Vecteur2\+D} v\mbox{[}$\,$\mbox{]})
+\item 
+double \hyperlink{vecteur2d_8h_a5c1f763b1d1581927662d6b1eeec3479}{maax} (double a, double b)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{vecteur2d_8h_a65e281a269ab67dd4281741959a9422e}{\index{vecteur2d.\+h@{vecteur2d.\+h}!fusionne@{fusionne}}
+\index{fusionne@{fusionne}!vecteur2d.\+h@{vecteur2d.\+h}}
+\subsubsection[{fusionne}]{\setlength{\rightskip}{0pt plus 5cm}void fusionne (
+\begin{DoxyParamCaption}
+\item[{const double}]{x\mbox{[}$\,$\mbox{]}, }
+\item[{const double}]{y\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{m, }
+\item[{{\bf Vecteur2\+D}}]{v\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}\label{vecteur2d_8h_a65e281a269ab67dd4281741959a9422e}
+\hypertarget{vecteur2d_8h_a5c1f763b1d1581927662d6b1eeec3479}{\index{vecteur2d.\+h@{vecteur2d.\+h}!maax@{maax}}
+\index{maax@{maax}!vecteur2d.\+h@{vecteur2d.\+h}}
+\subsubsection[{maax}]{\setlength{\rightskip}{0pt plus 5cm}double maax (
+\begin{DoxyParamCaption}
+\item[{double}]{a, }
+\item[{double}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{vecteur2d_8h_a5c1f763b1d1581927662d6b1eeec3479}
+\hypertarget{vecteur2d_8h_a65fe9f4f5afe1bc4b2cad2d85c5b8095}{\index{vecteur2d.\+h@{vecteur2d.\+h}!norme\+Sup@{norme\+Sup}}
+\index{norme\+Sup@{norme\+Sup}!vecteur2d.\+h@{vecteur2d.\+h}}
+\subsubsection[{norme\+Sup}]{\setlength{\rightskip}{0pt plus 5cm}double norme\+Sup (
+\begin{DoxyParamCaption}
+\item[{const {\bf Vecteur2\+D} \&}]{u}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{vecteur2d_8h_a65fe9f4f5afe1bc4b2cad2d85c5b8095}
+calcule $\vert$u$\vert$\+\_\+sup, c-\/à-\/d max($\vert$x$\vert$,$\vert$y$\vert$) \hypertarget{vecteur2d_8h_a1d4d71b477f6ed1cb4137da40bfa87de}{\index{vecteur2d.\+h@{vecteur2d.\+h}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!vecteur2d.\+h@{vecteur2d.\+h}}
+\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Vecteur2\+D} operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{const double \&}]{a, }
+\item[{const {\bf Vecteur2\+D} \&}]{u}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{vecteur2d_8h_a1d4d71b477f6ed1cb4137da40bfa87de}
+\hypertarget{vecteur2d_8h_a62103e3ee59519a5bc33e0bdc0728699}{\index{vecteur2d.\+h@{vecteur2d.\+h}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!vecteur2d.\+h@{vecteur2d.\+h}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{os, }
+\item[{const {\bf Vecteur2\+D} \&}]{u}
+\end{DoxyParamCaption}
+)}}\label{vecteur2d_8h_a62103e3ee59519a5bc33e0bdc0728699}

@@ -1,0 +1,44 @@
+\hypertarget{tools_8h}{\section{Outils/tools.h File Reference}
+\label{tools_8h}\index{Outils/tools.\+h@{Outils/tools.\+h}}
+}
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$algorithm$>$}\\*
+{\ttfamily \#include $<$chrono$>$}\\*
+{\ttfamily \#include $<$functional$>$}\\*
+{\ttfamily \#include \char`\"{}../\+Graphe/etiquette.\+h\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename F , typename... Args$>$ }\\milliseconds \hyperlink{tools_8h_a891757191c7b8e799f2cb489e985e62a}{execution} (unsigned int nb\+\_\+iter, std\+::function$<$ F(Args \&\&...) $>$ func, Args \&\&...args)
+\item 
+vector$<$ \hyperlink{class_etiquette}{Etiquette} $\ast$ $>$ \hyperlink{tools_8h_a17cb87cf06a7862e3e44efe3ecdfb2fc}{pareto} (const vector$<$ \hyperlink{class_etiquette}{Etiquette} $\ast$ $>$ \&list)
+\item 
+\hyperlink{class_sommet}{Sommet} $\ast$ \hyperlink{tools_8h_a677f6c8bffe4adb8d9d7359fdc40b142}{choisir} (const vector$<$ \hyperlink{class_sommet}{Sommet} $\ast$ $>$ \&list)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{tools_8h_a677f6c8bffe4adb8d9d7359fdc40b142}{\index{tools.\+h@{tools.\+h}!choisir@{choisir}}
+\index{choisir@{choisir}!tools.\+h@{tools.\+h}}
+\subsubsection[{choisir}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Sommet}$\ast$ choisir (
+\begin{DoxyParamCaption}
+\item[{const vector$<$ {\bf Sommet} $\ast$ $>$ \&}]{list}
+\end{DoxyParamCaption}
+)}}\label{tools_8h_a677f6c8bffe4adb8d9d7359fdc40b142}
+\hypertarget{tools_8h_a891757191c7b8e799f2cb489e985e62a}{\index{tools.\+h@{tools.\+h}!execution@{execution}}
+\index{execution@{execution}!tools.\+h@{tools.\+h}}
+\subsubsection[{execution}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename F , typename... Args$>$ milliseconds execution (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{nb\+\_\+iter, }
+\item[{std\+::function$<$ F(Args \&\&...) $>$}]{func, }
+\item[{Args \&\&...}]{args}
+\end{DoxyParamCaption}
+)}}\label{tools_8h_a891757191c7b8e799f2cb489e985e62a}
+\hypertarget{tools_8h_a17cb87cf06a7862e3e44efe3ecdfb2fc}{\index{tools.\+h@{tools.\+h}!pareto@{pareto}}
+\index{pareto@{pareto}!tools.\+h@{tools.\+h}}
+\subsubsection[{pareto}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf Etiquette}$\ast$$>$ pareto (
+\begin{DoxyParamCaption}
+\item[{const vector$<$ {\bf Etiquette} $\ast$ $>$ \&}]{list}
+\end{DoxyParamCaption}
+)}}\label{tools_8h_a17cb87cf06a7862e3e44efe3ecdfb2fc}
