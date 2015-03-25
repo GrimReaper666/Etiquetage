@@ -126,6 +126,7 @@ void baptiste(){
     unsigned int total = 0;
     for(unsigned int i = 0 ; i < nb_iter ; i++){
         auto start = system_clock::now();
+     //   for(int i = 0 ; i <200 ; i++)
         g.correction_etiquette("i1","i160",&choisir,&pareto);
         auto duration = duration_cast< milliseconds>(system_clock::now() - start);
         total+= duration.count();
@@ -314,11 +315,11 @@ void connexionEtDessin(){
 
 int main(){
 
- //   baptiste();
+    baptiste();
 //    jonathan();
 
 //    tuto_io_graphe();
-    connexionEtDessin();
+//    connexionEtDessin();
 
 
 
