@@ -17,6 +17,7 @@ L3 - Mars 2015
 	=> Graphes fournis pour les tests statistiques
 	=> Serveur graphique : serveur_dessin.jar
 	=> Rapport sous format texte
+	=> Tests statistiques dans le dossier Data (deux feuilles excel)
 	=> Divers ressources comme les diagrammes de classes DIA, etc...
 
 
