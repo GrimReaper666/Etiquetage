@@ -15,40 +15,42 @@ public:
     vector<Etiquette*> tags;
     string name;
     double min_resource,max_resource;
+    Etiquette* best;
 
 
     Sommet():
-        name("default_name"),
-        min_resource(0),
-        max_resource(0)
+        Sommet("default_name")
         {}
 
 
     Sommet(const string &name):
-        name(name),
-        min_resource(0),
-        max_resource(0)
+        Sommet(name,0,0)
         {}
 
     Sommet(const string &name, const double min, const double max):
         name(name),
         min_resource(min),
-        max_resource(max)
+        max_resource(max),
+        best(NULL)
         {}
 
 
-    void add_tag(const Etiquette &e){
+    inline void add_tag(const Etiquette &e){
         tags.push_back(new Etiquette(e));
+        if(best == NULL or best->cost > e.cost){
+            best = tags.back();
+        }
     }
 
-    void add_default_tag(){
+    inline void add_default_tag(){
         tags.push_back(new Etiquette(NULL,this,0,0));
+        best = tags.front();
     }
-
+/*
     bool operator ==(const Sommet &s)const{
         return s.name == name;
     }
-
+*/
 
     operator string () const{
        std::ostringstream oss;
@@ -61,18 +63,7 @@ public:
        oss << "))";
        return oss.str();
    }
-/*
-    double best() const{
-        //TODO faire une var membre
-        double best = DBL_MAX;
-        for(Etiquette* e : tags){
-            if(e->resources < best){
-                best = e->resources;
-            }
-        }
-        return best;
-    }
-*/
+
     virtual ~Sommet(){
         for(Etiquette* e: tags){
             delete e;

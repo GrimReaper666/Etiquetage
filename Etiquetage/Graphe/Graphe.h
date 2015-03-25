@@ -13,9 +13,11 @@
 #include <algorithm>
 #include <utility>
 #include <streambuf>
+#include <math.h>
 #include "etiquette.h"
 
 using std::unordered_map;
+using std::max;
 using std::pair;
 using std::fstream;
 using std::ostringstream;
@@ -42,7 +44,7 @@ public:
     Graphe(const string &s):
         name(s){}
 
-    void add_sommet(const Sommet &s){
+    inline void add_sommet(const Sommet &s){
         if( find_sommet(s.name) != NULL){
          throw Exception("sommet déjà existant");
         }
@@ -50,7 +52,7 @@ public:
     }
 
 
-    void add_successor( Sommet *from, Sommet *to){
+    inline void add_successor( Sommet *from, Sommet *to){
         if(successeurs.find(from) != successeurs.end()){
             successeurs[from].push_back(to);
         }
@@ -60,12 +62,12 @@ public:
         }
     }
 
-    void add_arete(const Arete &a){
+    inline void add_arete(const Arete &a){
         aretes.push_back(a);
         add_successor(a.from,a.to);
     }
 
-    void add_arete(const string &from, const string &to, const double cost, const double resource){
+    inline void add_arete(const string &from, const string &to, const double cost, const double resource){
         add_arete(Arete(get_sommet(from),get_sommet(to),cost,resource));
 
     }
@@ -77,7 +79,7 @@ public:
         }
     }
 
-    Sommet* find_sommet(const string &name){
+    inline Sommet* find_sommet(const string &name){
         for(Sommet* s: sommets){
             if(s->name == name){
                 return s;
@@ -91,7 +93,7 @@ public:
      * @param s
      * @return le sommet dans le graphe ayant le même nom
      */
-    Sommet* find_sommet(const Sommet &s){
+    inline Sommet* find_sommet(const Sommet &s){
         return find_sommet(s.name);
     }
 
@@ -100,7 +102,7 @@ public:
      * @param name
      * @return le sommet dans le graphe ayant le même nom, s'il n'existe pas lève une exception
      */
-    Sommet* get_sommet(const string &name){
+    inline Sommet* get_sommet(const string &name){
         Sommet* s(find_sommet(name));
         if(s == NULL){
             throw Exception("le sommet " + name + " n'existe pas dans le graphe");
@@ -116,8 +118,8 @@ public:
 
 
 
-    vector<Arete> shortest_path(const Sommet *from, const Sommet *to){
-        //TODO: variantes + virer from
+    vector<Arete> shortest_path( const Sommet *to){
+        //TODO: variantes
         vector<Arete> path;
         const Etiquette* best = to->tags[0];
         for(Etiquette* e : to->tags){
@@ -143,12 +145,15 @@ public:
 
             //On réinitialise les tags
             for(Sommet* s: sommets){
-                s->tags = vector<Etiquette*>();
+                for(Etiquette* e : s->tags){
+                    delete e;
+                }
+                s->tags.clear();
             }
             vector<Sommet*> list;
             list.push_back(source);
 
-            Sommet* xi = new Sommet();
+            Sommet* xi;
             source->add_default_tag();
             while(list.size() > 0){
 
@@ -161,14 +166,17 @@ public:
                     for(Etiquette* e: xi->tags){
 
                         Arete tmp = get_arete(xi,xj);
-                        if( e->resources + tmp.resource <= xj->max_resource ){
+                        Etiquette e_prime(e, xj, e->cost + tmp.cost, e->resources + tmp.resource);
+                        if(e_prime.resources < xj->min_resource){
+                            e_prime.resources = xj->min_resource;
+                        }
+                        if( e_prime.resources <= xj->max_resource ){
 
-                            Etiquette e_prime =  Etiquette(e, xj, e->cost + tmp.cost, e->resources + tmp.resource);
                             xj->add_tag(e_prime);
                             Etiquette* e_prime_pointer = xj->tags.back();
                             xj->tags = pareto(xj->tags);
-
-                            if(std::find(xj->tags.begin(),xj->tags.end(),e_prime_pointer) != xj->tags.end() ){
+                            //on test si e_prime_pointer est bien dans la liste retournée par pareto, comme l'orde est conservé, c'est le dernier de la liste
+                            if(e_prime_pointer == xj->tags.back()){
                                 if(std::find(list.begin(),list.end(),xj) == list.end()){
                                     list.push_back(xj);
                                 }
@@ -178,10 +186,7 @@ public:
                     }
                 }
             }
-
-            xi = NULL;
-            delete xi;
-            return shortest_path(source,puit);
+            return shortest_path(puit);
         }
         else{
             throw Exception("Il n'y a pas assez d'arete dans le graphe");
@@ -190,7 +195,7 @@ public:
 
 
 
-    Arete get_arete(const Sommet *from, const Sommet *to){
+    inline Arete get_arete(const Sommet *from, const Sommet *to){
         for(Arete a : aretes){
             if(a.from == from and a.to == to){
                 return a;
@@ -199,7 +204,7 @@ public:
         throw Exception("l'arete " + from->name + " => " + to->name + " n'existe pas dans le graphe");
     }
 
-    Arete get_arete(const string &from, const string &to){
+    inline Arete get_arete(const string &from, const string &to){
         return get_arete(find_sommet(from),find_sommet(to));
     }
 

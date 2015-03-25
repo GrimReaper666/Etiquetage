@@ -4,6 +4,7 @@
 #include "Outils/exception.h"
 #include "Dessin/connexion.h"
 #include "Dessin/dessinManager.h"
+#include <time.h>
 
 using namespace std;
 
@@ -103,35 +104,85 @@ void operator>>(fstream& in, Graphe& G)
     }
 }
 
+clock_t get_cpu_time(){
+#ifdef _WIN32_
+#include <windows.h>
+    return GetProcessTimes() //TODO ça a l'air relou
+#else
+    return clock();
+#endif
+
+}
 
 
-
-void baptiste(){
-
-
-
+void test_perf(const string &file_name, const string &from, const string &to,unsigned int nb_iter = 2){
     Graphe g("LOL2");
     fstream f;
-    f.open("Data/data_VRPTW_160_10_5_10.gpr", ios_base::in);
+    f.open(file_name, ios_base::in);
+    cout << "for file: " << file_name << endl;
     if(f.is_open()){
         f >> g;
         f.close();
     }
-    else
+    else{
         cout << "open fails" << endl;
-
-    const unsigned int nb_iter = 2000;
-    unsigned int total = 0;
-    for(unsigned int i = 0 ; i < nb_iter ; i++){
-        auto start = system_clock::now();
-     //   for(int i = 0 ; i <200 ; i++)
-        g.correction_etiquette("i1","i160",&choisir,&pareto);
-        auto duration = duration_cast< milliseconds>(system_clock::now() - start);
-        total+= duration.count();
-        cout << i <<endl;
+        exit( 0);
     }
-    long double moyenne = total/(long double)nb_iter;
-    cout << "une moyenne de: " << moyenne << endl;
+    clock_t total = 0;
+    long double moyenne = 0;
+    int failed = 1;
+    while(moyenne == 0){
+        for(unsigned int i = 0 ; i < nb_iter ; i++){
+            auto start = get_cpu_time();
+            for(int j = 0 ; j <failed ; j++){
+                g.correction_etiquette(from,to,&choisir_cout_min,&pareto);
+            }
+            total+= get_cpu_time() -start;
+        }
+        moyenne = total/(long double)nb_iter;
+        if(moyenne == 0){
+            failed += 10;
+        }
+    }
+    cout << "une moyenne de: " << (moyenne/CLOCKS_PER_SEC)*1000 << " millisecondes " << ( (failed == 1)? "" : "pour "+std::to_string(failed)+" executions") <<endl;
+}
+
+/**
+ * @brief test_all rq: ne pas tous les lancer à la fois car consomme toute la ram et baisse les performances.
+ */
+void test_all(){
+
+
+
+    test_perf("Data/data_VRPTW_10.gpr","s0","p0");
+
+
+    test_perf("Data/data_VRPTW_10_3_2_4.gpr","i1","i10");
+
+    // test_perf("Data/data_VRPTW_10_10_5_5_3.gpr","i1","i10");
+
+
+
+
+
+    test_perf("Data/data_VRPTW_20.gpr","i_1","i_20");
+
+    test_perf("Data/data_VRPTW_50_10_10_15.gpr","i1","i50");
+
+    test_perf("Data/data_VRPTW_100_10_5_9.gpr","i1","i100");
+    test_perf("Data/data_VRPTW_120_8_7_11.gpr","i1","i120");
+    test_perf("Data/data_VRPTW_140_8_7_11.gpr","i1","i140");
+
+    test_perf("Data/data_VRPTW_160_10_5_10.gpr","i1","i160");
+
+
+}
+
+void baptiste(){
+
+   test_all();
+
+
     /*
     vector<Arete> lol =  g.correction_etiquette("i1","i160",&choisir,&pareto);
  /*   for(Etiquette* e : g.get_sommet("p0")->tags){
@@ -145,6 +196,11 @@ void baptiste(){
 
 
 }
+
+
+
+
+
 
 void jonathan(){
 
@@ -303,7 +359,7 @@ void connexionEtDessin(){
         DessinManager dm(&connect);
 //        dm.dessinerAretes(G.getVArete());//listes d'arêtes
       //  dm.dessinerGraphe(G);//graphe
-        dm.dessinerAretes(G.correction_etiquette("s0","p0",&choisir,&pareto),false);
+        dm.dessinerAretes(G.correction_etiquette("s0","p0",&choisir_tete_liste,&pareto),false);
     }
     catch(Exception e){
         cout << e.message << endl;

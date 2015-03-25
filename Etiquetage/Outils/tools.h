@@ -4,8 +4,10 @@
 #include <iostream>
 #include <algorithm>
 #include <chrono>
+#include <cfloat>
 #include <functional>
 #include "../Graphe/etiquette.h"
+#include "../Graphe/sommet.h"
 using std::vector;
 using std::cout;
 using std::endl;
@@ -13,50 +15,96 @@ using std::chrono::milliseconds;
 using std::chrono::system_clock;
 using std::chrono::duration;
 using std::chrono::duration_cast;
-//fonction pour mesurer le temps d'execution d'une autre fonction
-template<typename F, typename ...Args>
-milliseconds execution(unsigned int nb_iter, std::function<F(Args&&...) > func,Args&&... args){
-  milliseconds total = 0;
-  for(unsigned int i = 0 ; i < nb_iter ; i++){
-      auto start = system_clock::now();
-      func(std::forward<Args>(args)...);
-      auto duration = duration_cast< milliseconds>(system_clock::now() - start);
-      total+= duration.count();
-  }
-  return total/nb_iter;
-}
 
-//fonction pareto variant 1
-vector<Etiquette*> pareto(const vector<Etiquette*> &list){
+
+/**
+ * @brief pareto
+ * @param list
+ * @return la liste des sommets non dominés dans le même ordre que celle passé en param
+ */
+inline vector<Etiquette*> pareto(const vector<Etiquette*> &list){
+
+    vector<Etiquette*> ret = vector<Etiquette*>(list);
+    vector<Etiquette*>::iterator prem = ret.begin(), sec;
+    while(prem != ret.end()){
+        sec = prem + 1;
+        while(prem != ret.end() and sec != ret.end()){
+            if((*prem)->domine(**sec)){
+                delete *sec;
+                ret.erase(sec);
+            }
+            else if((*sec)->domine(**prem)){
+                delete *prem;
+                ret.erase(prem);
+                sec = prem+1;
+            }
+            else{
+                sec++;
+            }
+        }
+        prem++;
+    }
+
+    /*
     vector<Etiquette*> ret, dominees;
     //création de la liste des étiquettes dominées
     for(auto e = list.begin(); e != list.end() ; e++){
-        for(auto e2 = list.begin(); e2 != list.end() ; e2++){
+        for(auto e2 = e+1; e2 != list.end() ; e2++){
             if((*e)->domine(**e2)){
-                if(std::find(dominees.begin(),dominees.end(),*e2) == dominees.end()){
-                    dominees.push_back(*e2);
-                }
+                dominees.push_back(*e2);
+            }
+            else if((*e2)->domine(**e)){
+                dominees.push_back(*e);
             }
         }
     }
 
+
+
+    for(auto e = list.begin() ; e != list.end() ;){
+        if(std::find(dominees.begin(),dominees.end(),*e) == dominees.end()){
+            ret.push_back(*e);
+            e++;
+        }
+        else{
+            delete *e;
+
+        }
+    }
+    /*
     for(Etiquette* e : list){
         if(std::find(dominees.begin(),dominees.end(),e) == dominees.end()){
             ret.push_back(e);
         }
+        else{
+            delete e;
+        }
     }
+     */
+
     return ret;
 }
 
 //etc...
 //fonction choisir variante 1
-Sommet* choisir(const vector<Sommet*> &list){
-    /*TODO: faire une version non débile */
+inline Sommet* choisir_tete_liste(const vector<Sommet*> &list){
     return list[0];
 }
 
 //fonction choisir variante 2
-
+inline Sommet* choisir_cout_min(const vector<Sommet*> &list){
+    double cost = DBL_MAX;
+    Sommet* best;
+    for(Sommet* s : list){
+        if(s->best){
+            if(s->best->cost < cost){
+                best = s;
+                cost = s->best->cost;
+            }
+        }
+    }
+    return best;
+}
 //etc
 
 

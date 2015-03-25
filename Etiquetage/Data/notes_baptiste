@@ -1,0 +1,5 @@
+variante front et meilleurs cout
++ implémentation de la fenêtre min
++ représentation client/server
+
+analyse des temps d'exec, amélioration. Utilisation valgrind fuite mémoire. Utilisation valgrind pour profiler les méthodes couteuses.

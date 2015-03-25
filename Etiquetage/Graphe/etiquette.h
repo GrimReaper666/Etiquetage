@@ -25,7 +25,7 @@ public:
     Etiquette():
         from(NULL), to(NULL), cost(0),resources(0){}
 
-    bool domine(const Etiquette &e){
+    inline bool domine(const Etiquette &e){
         return (    (cost < e.cost and resources <= e.resources)
                 or  (cost == e.cost and resources < e.resources)      );
     }
