@@ -1,0 +1,58 @@
+\hypertarget{class_dessinable}{\section{Dessinable Class Reference}
+\label{class_dessinable}\index{Dessinable@{Dessinable}}
+}
+
+
+The \hyperlink{class_dessinable}{Dessinable} class Il s'agit d'une interface décrivant le comportement que doivent avoir les classes de dessin. Cette classe sers donc majoritairement à assurer l'évolutivité de l'application en indiquant aux autres classes voulant dessiner les formes géometriques quelles méthodes elles doivent implémenter.  
+
+
+
+
+{\ttfamily \#include $<$dessinable.\+h$>$}
+
+Inheritance diagram for Dessinable\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_dessinable}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_dessinable_a8e19f229f68063ba9a5164ef269d294d}{dessiner\+Aretes} (const vector$<$ \hyperlink{class_arete}{Arete} $>$ \&va, bool graphe=true) const =0
+\item 
+virtual \hyperlink{class_dessinable_a36e721321d1ba4324f446445793e7100}{$\sim$\+Dessinable} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{class_dessinable}{Dessinable} class Il s'agit d'une interface décrivant le comportement que doivent avoir les classes de dessin. Cette classe sers donc majoritairement à assurer l'évolutivité de l'application en indiquant aux autres classes voulant dessiner les formes géometriques quelles méthodes elles doivent implémenter. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_dessinable_a36e721321d1ba4324f446445793e7100}{\index{Dessinable@{Dessinable}!````~Dessinable@{$\sim$\+Dessinable}}
+\index{````~Dessinable@{$\sim$\+Dessinable}!Dessinable@{Dessinable}}
+\subsubsection[{$\sim$\+Dessinable}]{\setlength{\rightskip}{0pt plus 5cm}virtual Dessinable\+::$\sim$\+Dessinable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{class_dessinable_a36e721321d1ba4324f446445793e7100}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_dessinable_a8e19f229f68063ba9a5164ef269d294d}{\index{Dessinable@{Dessinable}!dessiner\+Aretes@{dessiner\+Aretes}}
+\index{dessiner\+Aretes@{dessiner\+Aretes}!Dessinable@{Dessinable}}
+\subsubsection[{dessiner\+Aretes}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Dessinable\+::dessiner\+Aretes (
+\begin{DoxyParamCaption}
+\item[{const vector$<$ {\bf Arete} $>$ \&}]{va, }
+\item[{bool}]{graphe = {\ttfamily true}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_dessinable_a8e19f229f68063ba9a5164ef269d294d}
+
+
+Implemented in \hyperlink{class_dessin_manager_a1ff8d659f99a5e799f5d6e19c8be97dc}{Dessin\+Manager}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Dessin/\hyperlink{dessinable_8h}{dessinable.\+h}\end{DoxyCompactItemize}

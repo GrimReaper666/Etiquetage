@@ -1,0 +1,88 @@
+\hypertarget{class_dessin_manager}{\section{Dessin\+Manager Class Reference}
+\label{class_dessin_manager}\index{Dessin\+Manager@{Dessin\+Manager}}
+}
+
+
+The \hyperlink{class_dessin_manager}{Dessin\+Manager} class Cette classe est chargé de dessiner les formes géometriques. Le dessin est fait en envoyant les formes géometriques à un serveur distant afin que celui-\/ci dessine.  
+
+
+
+
+{\ttfamily \#include $<$dessin\+Manager.\+h$>$}
+
+Inheritance diagram for Dessin\+Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_dessin_manager}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_dessin_manager_ac3fc2fa6c1ac46893076b6b4529b8511}{Dessin\+Manager} (\hyperlink{class_connexion}{Connexion} $\ast$c)
+\item 
+virtual \hyperlink{class_dessin_manager_a1c10f7ad9be134e881db795c638883c5}{$\sim$\+Dessin\+Manager} ()
+\item 
+void \hyperlink{class_dessin_manager_a1ff8d659f99a5e799f5d6e19c8be97dc}{dessiner\+Aretes} (const vector$<$ \hyperlink{class_arete}{Arete} $>$ \&va, bool graphe) const 
+\begin{DoxyCompactList}\small\item\em dessiner\+Aretes \end{DoxyCompactList}\item 
+void \hyperlink{class_dessin_manager_a5f7b7feccd2c18af1d852c6ce78456c5}{dessiner\+Graphe} (const \hyperlink{class_graphe}{Graphe} \&G) const 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{class_dessin_manager}{Dessin\+Manager} class Cette classe est chargé de dessiner les formes géometriques. Le dessin est fait en envoyant les formes géometriques à un serveur distant afin que celui-\/ci dessine. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_dessin_manager_ac3fc2fa6c1ac46893076b6b4529b8511}{\index{Dessin\+Manager@{Dessin\+Manager}!Dessin\+Manager@{Dessin\+Manager}}
+\index{Dessin\+Manager@{Dessin\+Manager}!Dessin\+Manager@{Dessin\+Manager}}
+\subsubsection[{Dessin\+Manager}]{\setlength{\rightskip}{0pt plus 5cm}Dessin\+Manager\+::\+Dessin\+Manager (
+\begin{DoxyParamCaption}
+\item[{{\bf Connexion} $\ast$}]{c}
+\end{DoxyParamCaption}
+)}}\label{class_dessin_manager_ac3fc2fa6c1ac46893076b6b4529b8511}
+\hypertarget{class_dessin_manager_a1c10f7ad9be134e881db795c638883c5}{\index{Dessin\+Manager@{Dessin\+Manager}!````~Dessin\+Manager@{$\sim$\+Dessin\+Manager}}
+\index{````~Dessin\+Manager@{$\sim$\+Dessin\+Manager}!Dessin\+Manager@{Dessin\+Manager}}
+\subsubsection[{$\sim$\+Dessin\+Manager}]{\setlength{\rightskip}{0pt plus 5cm}virtual Dessin\+Manager\+::$\sim$\+Dessin\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{class_dessin_manager_a1c10f7ad9be134e881db795c638883c5}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_dessin_manager_a1ff8d659f99a5e799f5d6e19c8be97dc}{\index{Dessin\+Manager@{Dessin\+Manager}!dessiner\+Aretes@{dessiner\+Aretes}}
+\index{dessiner\+Aretes@{dessiner\+Aretes}!Dessin\+Manager@{Dessin\+Manager}}
+\subsubsection[{dessiner\+Aretes}]{\setlength{\rightskip}{0pt plus 5cm}void Dessin\+Manager\+::dessiner\+Aretes (
+\begin{DoxyParamCaption}
+\item[{const vector$<$ {\bf Arete} $>$ \&}]{va, }
+\item[{bool}]{graphe = {\ttfamily true}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_dessin_manager_a1ff8d659f99a5e799f5d6e19c8be97dc}
+
+
+dessiner\+Aretes 
+
+
+\begin{DoxyParams}{Parameters}
+{\em va} & \\
+\hline
+{\em graphe} & true si on dessine un graphe, false si on dessine le chemin \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_dessinable_a8e19f229f68063ba9a5164ef269d294d}{Dessinable}.
+
+\hypertarget{class_dessin_manager_a5f7b7feccd2c18af1d852c6ce78456c5}{\index{Dessin\+Manager@{Dessin\+Manager}!dessiner\+Graphe@{dessiner\+Graphe}}
+\index{dessiner\+Graphe@{dessiner\+Graphe}!Dessin\+Manager@{Dessin\+Manager}}
+\subsubsection[{dessiner\+Graphe}]{\setlength{\rightskip}{0pt plus 5cm}void Dessin\+Manager\+::dessiner\+Graphe (
+\begin{DoxyParamCaption}
+\item[{const {\bf Graphe} \&}]{G}
+\end{DoxyParamCaption}
+) const}}\label{class_dessin_manager_a5f7b7feccd2c18af1d852c6ce78456c5}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Dessin/\hyperlink{dessin_manager_8h}{dessin\+Manager.\+h}\item 
+Dessin/\hyperlink{dessin_manager_8cpp}{dessin\+Manager.\+cpp}\end{DoxyCompactItemize}

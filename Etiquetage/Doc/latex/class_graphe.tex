@@ -1,0 +1,403 @@
+\hypertarget{class_graphe}{\section{Graphe Class Reference}
+\label{class_graphe}\index{Graphe@{Graphe}}
+}
+
+
+The \hyperlink{class_graphe}{Graphe} class Cette classe représente un graphe. Elle est définie par une liste de sommets ainsi qu'une liste d'arêtes.  
+
+
+
+
+{\ttfamily \#include $<$Graphe.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_graphe_adb434f7fcd65a0da992946d699976808}{Graphe} (const string \&s)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_graphe}{Graphe}. \end{DoxyCompactList}\item 
+void \hyperlink{class_graphe_a99fc64177571ea73ae540fe27899e783}{add\+\_\+sommet} (const \hyperlink{class_sommet}{Sommet} \&s)
+\begin{DoxyCompactList}\small\item\em add\+\_\+sommet Ajoute un sommet au graphe. \end{DoxyCompactList}\item 
+void \hyperlink{class_graphe_aff29dc6bc5b4e5e028e12ac7e63571e6}{add\+\_\+successor} (\hyperlink{class_sommet}{Sommet} $\ast$from, \hyperlink{class_sommet}{Sommet} $\ast$to)
+\begin{DoxyCompactList}\small\item\em add\+\_\+successor \end{DoxyCompactList}\item 
+void \hyperlink{class_graphe_a4c845a9c2815cb68f3e9d075f40d5968}{add\+\_\+arete} (const \hyperlink{class_arete}{Arete} \&a)
+\begin{DoxyCompactList}\small\item\em add\+\_\+arete Ajoute une arête au graphe \end{DoxyCompactList}\item 
+void \hyperlink{class_graphe_a34df2e8f81e83ffde9feef6ac0bea29c}{add\+\_\+arete} (const string \&from, const string \&to, const double cost, const double resource)
+\begin{DoxyCompactList}\small\item\em add\+\_\+arete Ajoute une arête au graphe \end{DoxyCompactList}\item 
+virtual \hyperlink{class_graphe_a52fe805ae336c72b22b6d755822893b7}{$\sim$\+Graphe} ()
+\begin{DoxyCompactList}\small\item\em $\sim$\+Graphe \end{DoxyCompactList}\item 
+\hyperlink{class_sommet}{Sommet} $\ast$ \hyperlink{class_graphe_a78c033e49234a57fa86edbdcdc2c0da3}{find\+\_\+sommet} (const string \&\hyperlink{class_graphe_aba29a423311ef239951f6b6c37383444}{name})
+\begin{DoxyCompactList}\small\item\em find\+\_\+sommet Recherche si le sommet identifié par son nom est contenu dans le graphe. \end{DoxyCompactList}\item 
+\hyperlink{class_sommet}{Sommet} $\ast$ \hyperlink{class_graphe_af629041c83ff0754f0e1a7b3e9db5872}{find\+\_\+sommet} (const \hyperlink{class_sommet}{Sommet} \&s)
+\begin{DoxyCompactList}\small\item\em find\+\_\+sommet \end{DoxyCompactList}\item 
+\hyperlink{class_sommet}{Sommet} $\ast$ \hyperlink{class_graphe_a76b0a57584e44cbeef0a3563b6ec2751}{get\+\_\+sommet} (const string \&\hyperlink{class_graphe_aba29a423311ef239951f6b6c37383444}{name})
+\begin{DoxyCompactList}\small\item\em get\+\_\+sommet \end{DoxyCompactList}\item 
+vector$<$ \hyperlink{class_arete}{Arete} $>$ \hyperlink{class_graphe_ab9e88ea6bc8c5d7d4cd580e525e934b5}{correction\+\_\+etiquette} (const string \&from, const string \&to, \hyperlink{class_sommet}{Sommet} $\ast$\hyperlink{tools_8h_a677f6c8bffe4adb8d9d7359fdc40b142}{choisir}(const vector$<$ \hyperlink{class_sommet}{Sommet} $\ast$ $>$ \&list), vector$<$ \hyperlink{class_etiquette}{Etiquette} $\ast$ $>$ \hyperlink{tools_8h_a17cb87cf06a7862e3e44efe3ecdfb2fc}{pareto}(const vector$<$ \hyperlink{class_etiquette}{Etiquette} $\ast$ $>$ \&list))
+\begin{DoxyCompactList}\small\item\em correction\+\_\+etiquette \end{DoxyCompactList}\item 
+vector$<$ \hyperlink{class_arete}{Arete} $>$ \hyperlink{class_graphe_a334dcf698d519f22f276eda6d846a3de}{shortest\+\_\+path} (const \hyperlink{class_sommet}{Sommet} $\ast$from, const \hyperlink{class_sommet}{Sommet} $\ast$to)
+\begin{DoxyCompactList}\small\item\em shortest\+\_\+path \end{DoxyCompactList}\item 
+vector$<$ \hyperlink{class_arete}{Arete} $>$ \hyperlink{class_graphe_a39712d656bf8d7dbafbea4e0207565b3}{correction\+\_\+etiquette} (const \hyperlink{class_sommet}{Sommet} \&from, const \hyperlink{class_sommet}{Sommet} \&to, \hyperlink{class_sommet}{Sommet} $\ast$\hyperlink{tools_8h_a677f6c8bffe4adb8d9d7359fdc40b142}{choisir}(const vector$<$ \hyperlink{class_sommet}{Sommet} $\ast$ $>$ \&list), vector$<$ \hyperlink{class_etiquette}{Etiquette} $\ast$ $>$ \hyperlink{tools_8h_a17cb87cf06a7862e3e44efe3ecdfb2fc}{pareto}(const vector$<$ \hyperlink{class_etiquette}{Etiquette} $\ast$ $>$ \&list))
+\begin{DoxyCompactList}\small\item\em correction\+\_\+etiquette \end{DoxyCompactList}\item 
+\hyperlink{class_arete}{Arete} \hyperlink{class_graphe_a861e0c116f27493b176961bcb6daceee}{get\+\_\+arete} (const \hyperlink{class_sommet}{Sommet} $\ast$from, const \hyperlink{class_sommet}{Sommet} $\ast$to)
+\begin{DoxyCompactList}\small\item\em get\+\_\+arete Retourne une arête identifiée par son sommet source et destination \end{DoxyCompactList}\item 
+\hyperlink{class_arete}{Arete} \hyperlink{class_graphe_a048f84fc486a15cd69aad96fb93af08e}{get\+\_\+arete} (const string \&from, const string \&to)
+\begin{DoxyCompactList}\small\item\em get\+\_\+arete Retourne une arête identifiée par le nom de son sommet source et destination \end{DoxyCompactList}\item 
+\hyperlink{class_graphe_ac1174e4197d1a548bbaae047be13d61b}{operator string} () const 
+\begin{DoxyCompactList}\small\item\em operator string \end{DoxyCompactList}\item 
+const vector$<$ \hyperlink{class_arete}{Arete} $>$ \& \hyperlink{class_graphe_a43393cce73c8dba322682245585292e8}{get\+V\+Arete} () const 
+\begin{DoxyCompactList}\small\item\em get\+V\+Arete \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static string \hyperlink{class_graphe_a9a646d290fb90eacf40c9747d2ef86b4}{format\+Du\+Prof} (const \hyperlink{class_graphe}{Graphe} \&G)
+\begin{DoxyCompactList}\small\item\em format\+Du\+Prof \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{class_graphe_aba29a423311ef239951f6b6c37383444}{name}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{class_graphe}{Graphe} class Cette classe représente un graphe. Elle est définie par une liste de sommets ainsi qu'une liste d'arêtes. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_graphe_adb434f7fcd65a0da992946d699976808}{\index{Graphe@{Graphe}!Graphe@{Graphe}}
+\index{Graphe@{Graphe}!Graphe@{Graphe}}
+\subsubsection[{Graphe}]{\setlength{\rightskip}{0pt plus 5cm}Graphe\+::\+Graphe (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_graphe_adb434f7fcd65a0da992946d699976808}
+
+
+\hyperlink{class_graphe}{Graphe}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_graphe_a52fe805ae336c72b22b6d755822893b7}{\index{Graphe@{Graphe}!````~Graphe@{$\sim$\+Graphe}}
+\index{````~Graphe@{$\sim$\+Graphe}!Graphe@{Graphe}}
+\subsubsection[{$\sim$\+Graphe}]{\setlength{\rightskip}{0pt plus 5cm}virtual Graphe\+::$\sim$\+Graphe (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{class_graphe_a52fe805ae336c72b22b6d755822893b7}
+
+
+$\sim$\+Graphe 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_graphe_a4c845a9c2815cb68f3e9d075f40d5968}{\index{Graphe@{Graphe}!add\+\_\+arete@{add\+\_\+arete}}
+\index{add\+\_\+arete@{add\+\_\+arete}!Graphe@{Graphe}}
+\subsubsection[{add\+\_\+arete}]{\setlength{\rightskip}{0pt plus 5cm}void Graphe\+::add\+\_\+arete (
+\begin{DoxyParamCaption}
+\item[{const {\bf Arete} \&}]{a}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_graphe_a4c845a9c2815cb68f3e9d075f40d5968}
+
+
+add\+\_\+arete Ajoute une arête au graphe 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_graphe_a34df2e8f81e83ffde9feef6ac0bea29c}{\index{Graphe@{Graphe}!add\+\_\+arete@{add\+\_\+arete}}
+\index{add\+\_\+arete@{add\+\_\+arete}!Graphe@{Graphe}}
+\subsubsection[{add\+\_\+arete}]{\setlength{\rightskip}{0pt plus 5cm}void Graphe\+::add\+\_\+arete (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{from, }
+\item[{const string \&}]{to, }
+\item[{const double}]{cost, }
+\item[{const double}]{resource}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_graphe_a34df2e8f81e83ffde9feef6ac0bea29c}
+
+
+add\+\_\+arete Ajoute une arête au graphe 
+
+
+\begin{DoxyParams}{Parameters}
+{\em from} & \\
+\hline
+{\em to} & \\
+\hline
+{\em cost} & \\
+\hline
+{\em resource} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_graphe_a99fc64177571ea73ae540fe27899e783}{\index{Graphe@{Graphe}!add\+\_\+sommet@{add\+\_\+sommet}}
+\index{add\+\_\+sommet@{add\+\_\+sommet}!Graphe@{Graphe}}
+\subsubsection[{add\+\_\+sommet}]{\setlength{\rightskip}{0pt plus 5cm}void Graphe\+::add\+\_\+sommet (
+\begin{DoxyParamCaption}
+\item[{const {\bf Sommet} \&}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_graphe_a99fc64177571ea73ae540fe27899e783}
+
+
+add\+\_\+sommet Ajoute un sommet au graphe. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_graphe_aff29dc6bc5b4e5e028e12ac7e63571e6}{\index{Graphe@{Graphe}!add\+\_\+successor@{add\+\_\+successor}}
+\index{add\+\_\+successor@{add\+\_\+successor}!Graphe@{Graphe}}
+\subsubsection[{add\+\_\+successor}]{\setlength{\rightskip}{0pt plus 5cm}void Graphe\+::add\+\_\+successor (
+\begin{DoxyParamCaption}
+\item[{{\bf Sommet} $\ast$}]{from, }
+\item[{{\bf Sommet} $\ast$}]{to}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_graphe_aff29dc6bc5b4e5e028e12ac7e63571e6}
+
+
+add\+\_\+successor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em from} & \\
+\hline
+{\em to} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_graphe_ab9e88ea6bc8c5d7d4cd580e525e934b5}{\index{Graphe@{Graphe}!correction\+\_\+etiquette@{correction\+\_\+etiquette}}
+\index{correction\+\_\+etiquette@{correction\+\_\+etiquette}!Graphe@{Graphe}}
+\subsubsection[{correction\+\_\+etiquette}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf Arete}$>$ Graphe\+::correction\+\_\+etiquette (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{from, }
+\item[{const string \&}]{to, }
+\item[{{\bf Sommet} $\ast$}]{choisirconst vector$<$ Sommet $\ast$ $>$ \&list, }
+\item[{vector$<$ {\bf Etiquette} $\ast$ $>$ }]{paretoconst vector$<$ Etiquette $\ast$ $>$ \&list}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_graphe_ab9e88ea6bc8c5d7d4cd580e525e934b5}
+
+
+correction\+\_\+etiquette 
+
+
+\begin{DoxyParams}{Parameters}
+{\em from} & \\
+\hline
+{\em to} & \\
+\hline
+{\em choisir} & \\
+\hline
+{\em pareto} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_graphe_a39712d656bf8d7dbafbea4e0207565b3}{\index{Graphe@{Graphe}!correction\+\_\+etiquette@{correction\+\_\+etiquette}}
+\index{correction\+\_\+etiquette@{correction\+\_\+etiquette}!Graphe@{Graphe}}
+\subsubsection[{correction\+\_\+etiquette}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf Arete}$>$ Graphe\+::correction\+\_\+etiquette (
+\begin{DoxyParamCaption}
+\item[{const {\bf Sommet} \&}]{from, }
+\item[{const {\bf Sommet} \&}]{to, }
+\item[{{\bf Sommet} $\ast$}]{choisirconst vector$<$ Sommet $\ast$ $>$ \&list, }
+\item[{vector$<$ {\bf Etiquette} $\ast$ $>$ }]{paretoconst vector$<$ Etiquette $\ast$ $>$ \&list}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_graphe_a39712d656bf8d7dbafbea4e0207565b3}
+
+
+correction\+\_\+etiquette 
+
+
+\begin{DoxyParams}{Parameters}
+{\em from} & \\
+\hline
+{\em to} & \\
+\hline
+{\em choisir} & \\
+\hline
+{\em pareto} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_graphe_a78c033e49234a57fa86edbdcdc2c0da3}{\index{Graphe@{Graphe}!find\+\_\+sommet@{find\+\_\+sommet}}
+\index{find\+\_\+sommet@{find\+\_\+sommet}!Graphe@{Graphe}}
+\subsubsection[{find\+\_\+sommet}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Sommet}$\ast$ Graphe\+::find\+\_\+sommet (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_graphe_a78c033e49234a57fa86edbdcdc2c0da3}
+
+
+find\+\_\+sommet Recherche si le sommet identifié par son nom est contenu dans le graphe. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_graphe_af629041c83ff0754f0e1a7b3e9db5872}{\index{Graphe@{Graphe}!find\+\_\+sommet@{find\+\_\+sommet}}
+\index{find\+\_\+sommet@{find\+\_\+sommet}!Graphe@{Graphe}}
+\subsubsection[{find\+\_\+sommet}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Sommet}$\ast$ Graphe\+::find\+\_\+sommet (
+\begin{DoxyParamCaption}
+\item[{const {\bf Sommet} \&}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_graphe_af629041c83ff0754f0e1a7b3e9db5872}
+
+
+find\+\_\+sommet 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+le sommet dans le graphe ayant le même nom 
+\end{DoxyReturn}
+\hypertarget{class_graphe_a9a646d290fb90eacf40c9747d2ef86b4}{\index{Graphe@{Graphe}!format\+Du\+Prof@{format\+Du\+Prof}}
+\index{format\+Du\+Prof@{format\+Du\+Prof}!Graphe@{Graphe}}
+\subsubsection[{format\+Du\+Prof}]{\setlength{\rightskip}{0pt plus 5cm}static string Graphe\+::format\+Du\+Prof (
+\begin{DoxyParamCaption}
+\item[{const {\bf Graphe} \&}]{G}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}}\label{class_graphe_a9a646d290fb90eacf40c9747d2ef86b4}
+
+
+format\+Du\+Prof 
+
+
+\begin{DoxyParams}{Parameters}
+{\em G} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_graphe_a861e0c116f27493b176961bcb6daceee}{\index{Graphe@{Graphe}!get\+\_\+arete@{get\+\_\+arete}}
+\index{get\+\_\+arete@{get\+\_\+arete}!Graphe@{Graphe}}
+\subsubsection[{get\+\_\+arete}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Arete} Graphe\+::get\+\_\+arete (
+\begin{DoxyParamCaption}
+\item[{const {\bf Sommet} $\ast$}]{from, }
+\item[{const {\bf Sommet} $\ast$}]{to}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_graphe_a861e0c116f27493b176961bcb6daceee}
+
+
+get\+\_\+arete Retourne une arête identifiée par son sommet source et destination 
+
+
+\begin{DoxyParams}{Parameters}
+{\em from} & \\
+\hline
+{\em to} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_graphe_a048f84fc486a15cd69aad96fb93af08e}{\index{Graphe@{Graphe}!get\+\_\+arete@{get\+\_\+arete}}
+\index{get\+\_\+arete@{get\+\_\+arete}!Graphe@{Graphe}}
+\subsubsection[{get\+\_\+arete}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Arete} Graphe\+::get\+\_\+arete (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{from, }
+\item[{const string \&}]{to}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_graphe_a048f84fc486a15cd69aad96fb93af08e}
+
+
+get\+\_\+arete Retourne une arête identifiée par le nom de son sommet source et destination 
+
+
+\begin{DoxyParams}{Parameters}
+{\em from} & \\
+\hline
+{\em to} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_graphe_a76b0a57584e44cbeef0a3563b6ec2751}{\index{Graphe@{Graphe}!get\+\_\+sommet@{get\+\_\+sommet}}
+\index{get\+\_\+sommet@{get\+\_\+sommet}!Graphe@{Graphe}}
+\subsubsection[{get\+\_\+sommet}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Sommet}$\ast$ Graphe\+::get\+\_\+sommet (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_graphe_a76b0a57584e44cbeef0a3563b6ec2751}
+
+
+get\+\_\+sommet 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+le sommet dans le graphe ayant le même nom, s'il n'existe pas lève une exception 
+\end{DoxyReturn}
+\hypertarget{class_graphe_a43393cce73c8dba322682245585292e8}{\index{Graphe@{Graphe}!get\+V\+Arete@{get\+V\+Arete}}
+\index{get\+V\+Arete@{get\+V\+Arete}!Graphe@{Graphe}}
+\subsubsection[{get\+V\+Arete}]{\setlength{\rightskip}{0pt plus 5cm}const vector$<${\bf Arete}$>$\& Graphe\+::get\+V\+Arete (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_graphe_a43393cce73c8dba322682245585292e8}
+
+
+get\+V\+Arete 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_graphe_ac1174e4197d1a548bbaae047be13d61b}{\index{Graphe@{Graphe}!operator string@{operator string}}
+\index{operator string@{operator string}!Graphe@{Graphe}}
+\subsubsection[{operator string}]{\setlength{\rightskip}{0pt plus 5cm}Graphe\+::operator string (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_graphe_ac1174e4197d1a548bbaae047be13d61b}
+
+
+operator string 
+
+\hypertarget{class_graphe_a334dcf698d519f22f276eda6d846a3de}{\index{Graphe@{Graphe}!shortest\+\_\+path@{shortest\+\_\+path}}
+\index{shortest\+\_\+path@{shortest\+\_\+path}!Graphe@{Graphe}}
+\subsubsection[{shortest\+\_\+path}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf Arete}$>$ Graphe\+::shortest\+\_\+path (
+\begin{DoxyParamCaption}
+\item[{const {\bf Sommet} $\ast$}]{from, }
+\item[{const {\bf Sommet} $\ast$}]{to}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_graphe_a334dcf698d519f22f276eda6d846a3de}
+
+
+shortest\+\_\+path 
+
+
+\begin{DoxyParams}{Parameters}
+{\em from} & \\
+\hline
+{\em to} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_graphe_aba29a423311ef239951f6b6c37383444}{\index{Graphe@{Graphe}!name@{name}}
+\index{name@{name}!Graphe@{Graphe}}
+\subsubsection[{name}]{\setlength{\rightskip}{0pt plus 5cm}string Graphe\+::name}}\label{class_graphe_aba29a423311ef239951f6b6c37383444}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Graphe/\hyperlink{_graphe_8h}{Graphe.\+h}\end{DoxyCompactItemize}

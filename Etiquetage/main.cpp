@@ -382,8 +382,8 @@ int main(){
     return 0;
 }
 
-
 /*
+
 int main(int argc, char* argv[])
 {
     string path = "Data/data_VRPTW_10.gpr";
@@ -394,6 +394,7 @@ int main(int argc, char* argv[])
     if(argc == 1){
         //demande de rentrer le nom du graphe à lire
         cout << "Entrez le nom du fichier contenant le graphe a ouvrir : ";
+//TODO : Décommenter le cin quand plus phase de test
 //        cin >> path;
     }
     else if(argc == 2){
@@ -406,7 +407,6 @@ int main(int argc, char* argv[])
     cout << endl;
     cout << endl << "[+] Chemin vers le graphe a ouvrir :" << endl;
     cout << path << endl;
-//    cin >> path;
 
 
 //Lecture d'un graphe depuis un fichier
@@ -422,7 +422,7 @@ int main(int argc, char* argv[])
 //TODO
         //Calcule de l'algo
         cout << endl << "[+] Debut du calcule de chemin..." << endl;
-        vector<Arete> chemin = G.correction_etiquette("s0", "p0",&choisir,&pareto);
+        vector<Arete> chemin = G.correction_etiquette("s0", "p0",&choisir_cout_min,&pareto);
 //        vector<Arete> chemin = G.correction_etiquette("i1", "i160",&choisir,&pareto);
         cout << "[+] Fin." << endl;
         cout << endl << "TODO - sortie timer algo TODO" << endl;
@@ -466,4 +466,8 @@ int main(int argc, char* argv[])
 
     return 0;
 }
+
+
+
+
 */
