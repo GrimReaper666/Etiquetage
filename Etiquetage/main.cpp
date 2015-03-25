@@ -117,6 +117,7 @@ clock_t get_cpu_time(){
 }
 
 
+
 void test_perf(const string &file_name, const string &from, const string &to,unsigned int nb_iter = 1){
     Graphe g("LOL2");
     fstream f;
@@ -134,9 +135,21 @@ void test_perf(const string &file_name, const string &from, const string &to,uns
     long double moyenne = 0;
     for(unsigned int i = 0 ; i < nb_iter ; i++){
         clock_t start = get_cpu_time();
-        g.correction_etiquette(from,to,&choisir_cout_min,&pareto,true);
+        vector<Arete> chemin = g.correction_etiquette(from,to,&choisir_tete_liste,&pareto,false);
         total+= get_cpu_time() -start;
+        cout << endl << "[+] enregistrement dans un fichier";
+
+        stringstream ss;
+        ss  << file_name << endl;
+        for(Arete a : chemin){
+            ss << a.to->name << " <- ";
+        }
+        ss << chemin.back().from->name << endl;
+        ofstream f2("res", ios_base::app);
+        f2 << ss.str();
+        f2.close();
     }
+
     moyenne = total/(long double)nb_iter;
     cout << "une moyenne de: " << (moyenne) << " millisecondes " <<endl;
 }
@@ -362,7 +375,6 @@ void connexionEtDessin(){
 }
 
 
-/*
 int main(){
 
     baptiste();
@@ -376,7 +388,7 @@ int main(){
     return 0;
 }
 
-*/
+/*
 
 int main(int argc, char* argv[])
 {
@@ -573,7 +585,7 @@ int main(int argc, char* argv[])
 
     return 0;
 }
-
+*/
 
 
 
