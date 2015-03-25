@@ -82,7 +82,7 @@ public:
 
     string toString() const{
         std::ostringstream oss;
-        oss << (this->min_resource*10-300) << ", " << (this->max_resource*8-300);
+        oss << (this->min_resource*8-300) << ", " << (this->max_resource*6-300);
         return oss.str();
     }
 
