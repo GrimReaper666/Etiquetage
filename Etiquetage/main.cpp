@@ -4,6 +4,7 @@
 #include "Outils/exception.h"
 #include "Dessin/connexion.h"
 #include "Dessin/dessinManager.h"
+#include "Graphe/Graphe.h"
 #include <time.h>
 
 using namespace std;
@@ -105,7 +106,7 @@ void operator>>(fstream& in, Graphe& G)
 }
 
 clock_t get_cpu_time(){
-#ifdef _WIN32_
+#ifdef _WIN32
 #include <windows.h>
     return GetProcessTimes() //TODO ça a l'air relou
 #else
@@ -115,7 +116,7 @@ clock_t get_cpu_time(){
 }
 
 
-void test_perf(const string &file_name, const string &from, const string &to,unsigned int nb_iter = 2){
+void test_perf(const string &file_name, const string &from, const string &to,unsigned int nb_iter = 3){
     Graphe g("LOL2");
     fstream f;
     f.open(file_name, ios_base::in);
@@ -130,21 +131,15 @@ void test_perf(const string &file_name, const string &from, const string &to,uns
     }
     clock_t total = 0;
     long double moyenne = 0;
-    int failed = 1;
     while(moyenne == 0){
         for(unsigned int i = 0 ; i < nb_iter ; i++){
-            auto start = get_cpu_time();
-            for(int j = 0 ; j <failed ; j++){
-                g.correction_etiquette(from,to,&choisir_cout_min,&pareto);
-            }
+            clock_t start = get_cpu_time();
+            g.correction_etiquette(from,to,&choisir_cout_min,&pareto,true);
             total+= get_cpu_time() -start;
         }
         moyenne = total/(long double)nb_iter;
-        if(moyenne == 0){
-            failed += 10;
-        }
     }
-    cout << "une moyenne de: " << (moyenne/CLOCKS_PER_SEC)*1000 << " millisecondes " << ( (failed == 1)? "" : "pour "+std::to_string(failed)+" executions") <<endl;
+    cout << "une moyenne de: " << (moyenne/CLOCKS_PER_SEC)*1000 << " millisecondes " <<endl;
 }
 
 /**
@@ -359,7 +354,7 @@ void connexionEtDessin(){
         DessinManager dm(&connect);
 //        dm.dessinerAretes(G.getVArete());//listes d'arêtes
       //  dm.dessinerGraphe(G);//graphe
-        dm.dessinerAretes(G.correction_etiquette("s0","p0",&choisir_tete_liste,&pareto),false);
+        dm.dessinerAretes(G.correction_etiquette("s0","p0",&choisir_tete_liste,&pareto, true),false);
     }
     catch(Exception e){
         cout << e.message << endl;

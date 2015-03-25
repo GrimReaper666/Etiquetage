@@ -164,9 +164,9 @@ public:
      * @param pareto
      * @return
      */
-    vector<Arete> correction_etiquette(const string &from, const string &to,Sommet* choisir(const vector<Sommet*> &list), vector<Etiquette*> pareto(const vector<Etiquette*> &list) ){
+    vector<Arete> correction_etiquette(const string &from, const string &to,Sommet* choisir(vector<Sommet*> &list), vector<Etiquette*> pareto(const vector<Etiquette*> &list), bool borne_min ){
         Sommet* f(get_sommet(from)) , *t(get_sommet(to));
-        return correction_etiquette(*f,*t,choisir,pareto);
+        return correction_etiquette(*f,*t,choisir,pareto,borne_min);
     }
 
 
@@ -205,7 +205,7 @@ public:
      * @param pareto
      * @return
      */
-    vector<Arete> correction_etiquette(const Sommet &from, const Sommet &to,Sommet* choisir(const vector<Sommet*> &list), vector<Etiquette*> pareto(const vector<Etiquette*> &list) ){
+    vector<Arete> correction_etiquette(const Sommet &from, const Sommet &to,Sommet* choisir(vector<Sommet*> &list), vector<Etiquette*> pareto(const vector<Etiquette*> &list), bool borne_min ){
 
         if(sommets.size() > 0){
 
@@ -227,7 +227,7 @@ public:
 
                 xi = choisir(list);
                 //TODO: supprimer dans choisir, meilleur perf :)
-                list.erase(std::find(list.begin(),list.end(),xi));
+                //list.erase(std::find(list.begin(),list.end(),xi));
 
                 for(Sommet* xj : successeurs[xi]){
 
@@ -235,7 +235,7 @@ public:
 
                         Arete tmp = get_arete(xi,xj);
                         Etiquette e_prime(e, xj, e->cost + tmp.cost, e->resources + tmp.resource);
-                        if(e_prime.resources < xj->min_resource){
+                        if(borne_min && e_prime.resources < xj->min_resource){
                             e_prime.resources = xj->min_resource;
                         }
                         if( e_prime.resources <= xj->max_resource ){

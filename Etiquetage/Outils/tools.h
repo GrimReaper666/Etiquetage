@@ -8,6 +8,7 @@
 #include <functional>
 #include "../Graphe/etiquette.h"
 #include "../Graphe/sommet.h"
+#include "../Graphe/Graphe.h"
 using std::vector;
 using std::cout;
 using std::endl;
@@ -87,25 +88,35 @@ inline vector<Etiquette*> pareto(const vector<Etiquette*> &list){
 
 //etc...
 //fonction choisir variante 1
-inline Sommet* choisir_tete_liste(const vector<Sommet*> &list){
-    return list[0];
+inline Sommet* choisir_tete_liste(vector<Sommet*> &list){
+    Sommet* ret = list.front();
+    list.erase(list.begin());
+    return ret;
 }
 
 //fonction choisir variante 2
-inline Sommet* choisir_cout_min(const vector<Sommet*> &list){
+inline Sommet* choisir_cout_min(vector<Sommet*> &list){
     double cost = DBL_MAX;
     Sommet* best;
+    size_t pos = 0, i = 0;
     for(Sommet* s : list){
         if(s->best){
             if(s->best->cost < cost){
                 best = s;
                 cost = s->best->cost;
+                pos = i;
             }
         }
+        i++;
     }
+    list.erase(list.begin()+pos);
     return best;
 }
 //etc
+
+
+
+
 
 
 #endif // TOOLS
