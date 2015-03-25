@@ -381,6 +381,7 @@ int main(){
 int main(int argc, char* argv[])
 {
     string path = "Data/data_VRPTW_10_3_2_4.gpr";
+    string s = "i1", p = "i10";
     bool end = false;
     while(!end){
         char mess = 'z';
@@ -389,8 +390,8 @@ int main(int argc, char* argv[])
 
 
     //Récupération du chemin du graphe à ouvrir
+        bool defaut;
         if(argc == 1 ){
-            bool defaut;
             while(mess != 'o' and mess != 'n'){
                 cout << "voulez vous le chemin graphe par défaut: " <<endl<< path <<endl<< " (o/n) ?" << endl;
                 cin >> mess;
@@ -435,7 +436,7 @@ int main(int argc, char* argv[])
             bool borne;
             mess = 'z';
             while(mess != 'o' and mess != 'n'){
-                cout << "voulez vous prendre en compte la borne inférieu(o/n) ?" << endl;
+                cout << "voulez vous prendre en compte la borne inférieur (o/n) ?" << endl;
                 cin >> mess;
                 switch (mess) {
                 case 'o':
@@ -461,15 +462,43 @@ int main(int argc, char* argv[])
                 }
             }
 
-            cout << endl << "[+] Debut du calcule de chemin..." << endl;
-            try{
-            vector<Arete> chemin = G.correction_etiquette("s0", "p0",choisir,&pareto,borne);
-            }
-            catch( Exception e){
-                cout << e.message << endl;
-            }
+            bool echec = true;
+            vector<Arete> chemin;
+            mess = 'z';
+            bool s_p = false;
 
-            cout << "[+] Fin." << endl;
+            while(echec){
+                echec = false;
+                if( defaut){
+                    while(mess != 'o' and mess != 'n'){
+                        cout << "voulez vous utiliser les sources et puits par défaut(o/n) ?" << endl;
+                        cin >> mess;
+                        switch (mess) {
+                        case 'o':
+                            s_p = true;
+                            break;
+                        case 'n':
+                            s_p= false;
+                            break;
+                        }
+                    }
+                }
+                if( ! s_p){
+                    cout << "entrez le nom de la source: ";
+                    cin >>s;
+                    cout << "entrez le nom du puit: ";
+                    cin >> p;
+                }
+                try{
+                    cout << endl << "[+] Debut du calcule de chemin..." << endl;
+                    chemin = G.correction_etiquette(s, p, choisir, &pareto, borne);
+                    cout << "[+] Fin." << endl;
+                }
+                catch( Exception e){
+                    cout << e.message << endl;
+                    echec = true;
+                }
+            }
 
             //Affichage du chemin rendu par l'algo
             cout << endl << "[+] Chemin rendu par l'algo:" << endl;
