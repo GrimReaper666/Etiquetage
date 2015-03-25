@@ -116,7 +116,7 @@ clock_t get_cpu_time(){
 }
 
 
-void test_perf(const string &file_name, const string &from, const string &to,unsigned int nb_iter = 3){
+void test_perf(const string &file_name, const string &from, const string &to,unsigned int nb_iter = 20){
     Graphe g("LOL2");
     fstream f;
     f.open(file_name, ios_base::in);

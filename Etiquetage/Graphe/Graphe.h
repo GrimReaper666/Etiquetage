@@ -226,8 +226,6 @@ public:
             while(list.size() > 0){
 
                 xi = choisir(list);
-                //TODO: supprimer dans choisir, meilleur perf :)
-                //list.erase(std::find(list.begin(),list.end(),xi));
 
                 for(Sommet* xj : successeurs[xi]){
 
